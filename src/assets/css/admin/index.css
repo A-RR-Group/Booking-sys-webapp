@@ -40,6 +40,10 @@
     font-weight: bold;
     font-size: 15px;
     font-family: sans-serif;
+}
+.GoBackLink Div{
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 .GoBackLink img{

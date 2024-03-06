@@ -35,7 +35,11 @@ export default function Adminlogin(){
                     </div>
                     <Button text="Login" backgroundColor="#FF4D00"></Button>
                 </div>
-                <div className="GoBackLink"> <img src={LeftIcon} alt="" /> &nbsp; Lost your way? Go back to home</div>
+                <div className="GoBackLink">
+                    <div>
+                    <img src={LeftIcon} alt="" /> &nbsp; Lost your way? Go back to home
+                    </div>
+                </div>
             </div>
         );
     }
