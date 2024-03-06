@@ -18,6 +18,7 @@
 
 .DesktopOnlyContainer p{
     text-align: justify;
+    font-size: 14px;
 }
 
 .DesktopOnlyContainer .GoBackLink{

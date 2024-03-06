@@ -8,7 +8,7 @@ export default function InputField (props){
                 <img src={props.image} alt=""/>
             </div>
             <div className="InputDiv">
-                <input  autocomplete="off" type={props.type} placeholder={props.placeholder}/>
+                <input autocomplete="off" type={props.type} placeholder={props.placeholder}/>
             </div>
         </div>
         </>
