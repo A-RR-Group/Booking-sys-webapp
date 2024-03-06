@@ -11,7 +11,7 @@ import DesktopOnly from "../DesktopOnly"
 export default function Adminlogin(){
     const [width, setWidth] = useState(window.innerWidth);
 
-    // After page load n resize set new width 
+    // After page load on resize set new width 
     useEffect(() => {
         const handleResize = () => {
             setWidth(window.innerWidth);
