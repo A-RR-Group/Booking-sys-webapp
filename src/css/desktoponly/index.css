@@ -12,8 +12,8 @@
 }
 
 .DesktopIcon{
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
 }
 
 .DesktopOnlyContainer p{
@@ -23,5 +23,4 @@
 .DesktopOnlyContainer .GoBackLink{
     font-size: 16px;
     font-weight: bold;
-
 }

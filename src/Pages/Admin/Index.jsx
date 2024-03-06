@@ -3,22 +3,20 @@ import MailIcon from "../../Icons/d8e33892c4efea67faa5a1808f6accee.png"
 import LockIcon from "../../Icons/lock.png"
 import BusIcon from "../../Icons/bus.png"
 import LeftIcon from "../../Icons/left-arrow.png"
-import InputField from "../../components/inputField"
-import Button from "../../components/button"
+import InputField from "../../Components/inputField"
+import Button from "../../Components/button"
 import "../../css/admin/index.css"
 import DesktopOnly from "../DesktopOnly"
 
 export default function Adminlogin(){
     const [width, setWidth] = useState(window.innerWidth);
 
+    // After page load on resize set new width 
     useEffect(() => {
         const handleResize = () => {
             setWidth(window.innerWidth);
         };
-
         window.addEventListener('resize', handleResize);
-
-        // Cleanup function to remove the event listener when the component unmounts
         return () => {
             window.removeEventListener('resize', handleResize);
         };

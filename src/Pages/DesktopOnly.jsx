@@ -8,7 +8,7 @@ export default function DesktopOnly(){
         <div className="DesktopOnlyContainer">
             <img src={DesktopIcon} className="DesktopIcon" alt="" />
             <p>This page is desktop only, Go back home or <br /> try visiting from a desktop or laptop device.</p>
-            <div className="GoBackLink"> <img src={LeftIcon} alt="" /> &nbsp;Go back to home</div>
+            <div className="GoBackLink"> <img src={LeftIcon} alt="" /> &nbsp;Go back home</div>
         </div>
         </>
     )
