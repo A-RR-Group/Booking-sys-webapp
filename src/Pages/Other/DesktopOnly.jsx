@@ -1,6 +1,6 @@
-import DesktopIcon from "../assets/Icons/desktop.png"
-import LeftIcon from "../assets/Icons/left-arrow.png"
-import "../assets/css/desktoponly/index.css"
+import DesktopIcon from "../../assets/Icons/desktop.png"
+import LeftIcon from "../../assets/Icons/left-arrow.png"
+import "../../assets/css/other/DesktopOnly.css"
 
 export default function DesktopOnly(){
     return(

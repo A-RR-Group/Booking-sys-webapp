@@ -6,7 +6,7 @@ import LeftIcon from "../../assets/Icons/left-arrow.png"
 import InputField from "../../components/inputField"
 import Button from "../../components/button"
 import "../../assets/css/admin/index.css"
-import DesktopOnly from "../DesktopOnly"
+import DesktopOnly from "../Other/DesktopOnly"
 
 export default function Adminlogin(){
     const [width, setWidth] = useState(window.innerWidth);
