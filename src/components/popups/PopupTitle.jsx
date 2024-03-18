@@ -1,21 +1,9 @@
-import "../../assets/css/components/popups/popupTitle.css"
-import Button from "../button"
+import "../../assets/css/components/popups/PopupTitle.css"
 
-export default function popupTitle(props) {
+export default function PopupTitle(props){
     return(
         <>
-        <div className="popupAll">
-            <div className="popupContainer">
-                <div className="popupTitleDiv" style={{color: "#FF4D00", backgroundColor: "#FF4D0026"}}>Bruce</div>
-                <div className="listingInput">
-                    <img src="" alt="" />
-                    <p>Input:</p>
-                    <input placeholder="text" />
-                    <p className="inputExtraInfo">(Input extra)</p>
-                </div>
-                <Button text="Add Express" backgroundColor="#FF4D00"></Button>
-            </div>
-        </div>
+            <div className="popupTitle" style={{color: `${props.color}`}}>{props.text}</div>
         </>
     )
 }

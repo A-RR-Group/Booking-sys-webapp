@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MailIcon from "../../assets/Icons/d8e33892c4efea67faa5a1808f6accee.png"
+import MailIcon from "../../assets/Icons/mail.png"
 import LockIcon from "../../assets/Icons/lock.png"
 import BusIcon from "../../assets/Icons/bus.png"
 import LeftIcon from "../../assets/Icons/left-arrow.png"
