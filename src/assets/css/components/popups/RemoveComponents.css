@@ -1,0 +1,33 @@
+.popupAll{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9e9e9;
+}
+.popupContainer{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    gap: 20px;
+}
+.warningDiv{
+    font-family: sans-serif;
+    width: 360px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.warningDiv .warningText{
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.warningDiv .deletedSubject{
+    font-weight: bold;
+}

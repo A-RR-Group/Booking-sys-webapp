@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import MailIcon from "../../assets/Icons/d8e33892c4efea67faa5a1808f6accee.png"
+import MailIcon from "../../assets/Icons/mail.png"
 import LockIcon from "../../assets/Icons/lock.png"
 import BusIcon from "../../assets/Icons/bus.png"
 import LeftIcon from "../../assets/Icons/left-arrow.png"
-import InputField from "../../Components/inputField"
-import Button from "../../Components/button"
+import InputField from "../../components/inputField"
+import Button from "../../components/button"
 import "../../assets/css/admin/index.css"
-import DesktopOnly from "../DesktopOnly"
+import DesktopOnly from "../Other/DesktopOnly"
 
 export default function Adminlogin(){
     const [width, setWidth] = useState(window.innerWidth);
 
-    // After page load n resize set new width 
+    // After page load on resize set new width 
     useEffect(() => {
         const handleResize = () => {
             setWidth(window.innerWidth);
