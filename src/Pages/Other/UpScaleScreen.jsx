@@ -1,7 +1,7 @@
 import ResizeIcon from "../../assets/Icons/resize.png";
 import "../../assets/css/other/UpScaleScreen.css"
 
-export default function App() {
+export default function Upscale() {
   return (
     <>
     <div className="UpScaleScreenContainer">

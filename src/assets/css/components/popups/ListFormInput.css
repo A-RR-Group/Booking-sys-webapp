@@ -1,7 +1,6 @@
 .listFormInputDiv{
     width: 100%;
     display: flex;
-    font-weight: bold;
     flex-direction: row;
     font-family: sans-serif;
     justify-content: space-between;
@@ -23,12 +22,11 @@
     width: 65%;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 16px;
     border: none;
     outline: none;
 }
-.listFormInputDiv .listInput::placeholder{
-    font-weight: bold;
-    font-size: 14px;
+.listFormInputDiv .listInput::placeholder{    
+    font-size: 16px;
     line-height: 16px;
 }
