@@ -3,8 +3,8 @@ import BusIcon from "../../assets/Icons/bus.png"
 import MailIcon from "../../assets/Icons/mail.png"
 import PhoneIcon from "../../assets/Icons/phone.png"
 import Button from "../button"
-import PopupTitle from "./PopupTitle"
-import ListFormInput from "./ListFormInput"
+import PopupTitle from "../PopupTitle"
+import ListFormInput from "../ListFormInput"
 
 export default function AddExpress() {
     return(
