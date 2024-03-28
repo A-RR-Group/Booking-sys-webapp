@@ -1,10 +1,10 @@
 import LogoutIcon from "../assets/Icons/logout.png"
-import "../assets/css/components/ExpressMore.css"
+import "../assets/css/components/AdminMore.css"
 
-export default function ExpressMore(){
+export default function AdminMore(){
     return(
         <>
-            <div className="ExpressMoreContainer">
+            <div className="AdminMoreContainer">
                 <p>Logout</p>
                 <img src={LogoutIcon} alt="" />
             </div>
