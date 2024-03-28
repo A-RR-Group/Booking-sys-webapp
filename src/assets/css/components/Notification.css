@@ -1,0 +1,17 @@
+.NotificationContainer{
+    display: flex;
+    padding: 15px 0 15px 15px;
+    gap: 2px;
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+    font-weight: bold;
+    width: fit-content;
+    font-family: sans-serif;
+}
+.NotificationContainer img{
+    margin: -20px -6px 0px 0px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

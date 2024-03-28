@@ -5,7 +5,7 @@ import BusIcon from "../../assets/Icons/bus.png"
 import LeftIcon from "../../assets/Icons/left-arrow.png"
 import InputField from "../../components/inputField"
 import Button from "../../components/button"
-import "../../assets/css/admin/index.css"
+import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly"
 
 export default function Adminlogin(){
