@@ -1,0 +1,23 @@
+.AdminMoreContainer{
+    width: 132px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    font-family: sans-serif;
+    border: 1px solid #00000033;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    cursor: pointer;
+}
+
+.AdminMoreContainer p{
+    font-size: 16px;
+    color: #FF0000;
+}
+
+.AdminMoreContainer img{
+    width: 14px;
+    height: 14px;
+}

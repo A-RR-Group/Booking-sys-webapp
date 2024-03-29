@@ -1,6 +1,6 @@
 import "../../assets/css/components/popups/RemoveComponents.css"
 import Button from "../button"
-import PopupTitle from "./PopupTitle"
+import PopupTitle from "../PopupTitle"
 
 export default function RemoveBusStation() {
     return(
