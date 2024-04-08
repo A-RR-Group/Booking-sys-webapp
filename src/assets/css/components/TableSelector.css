@@ -1,0 +1,10 @@
+.TableSelectorContainer{
+    height: 40px;
+    padding: 0 15px 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FF4D00;
+    border: 1px solid #FF4D00;
+    cursor: pointer;
+}

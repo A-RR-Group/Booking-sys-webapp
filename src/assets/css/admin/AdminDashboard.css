@@ -1,8 +1,6 @@
 .AdminDashboardAll{
     display: flex;
     flex-direction: column;
-    /* background-color: blueviolet; */
-    /* width: 100%; */
     padding: 30px;
     margin: 0;
     gap: 30px;
@@ -19,6 +17,10 @@
     height: 40px;
 }
 
+.AdminIconsDiv img:last-child{
+    cursor: pointer;
+}
+
 .AdminNameStats{
     font-family: sans-serif;
     font-weight: bolder;
@@ -27,98 +29,17 @@
 .AdminSystemStatistics{
     width: 100%;
     height: 160px;
-    background-color: #F1F1F1;
-    border-radius: 20px;
     display: flex;
     flex-direction: row;
-    border-right: 4px solid white;
-}
-.AdminName h1{
-    font-size: 50px;
-}
-.AdminName h2{
-    font-size: 30px;
-}
-.AdminSystemStatistics div{
-    width: 25%;
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-right: 4px solid white;
-    color: #000000B2;
-}
-.AdminSystemStatistics div h1{
-    font-size: 40px;
-}
-.AdminSystemStatistics div p{
-    font-size: 17px;
 }
 
 .AdminTableSelector{
     display: flex;
     width: fit-content;
     height: 40px;
-    border: 1px solid #FF4D00B2;
-    border-radius: 10px;
-}
-.AdminTableSelector div{
-    height: 40px;
-    padding: 0 15px 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #FF4D00;
-}
-.AdminTableSelector div:first-child{
-    border-top-left-radius: 9px;
-    border-bottom-left-radius: 9px;
-}
-.AdminTableSelector div{
-    border-right: 1px solid #FF4D00;
-}
-.AdminTableSelector div:last-child{
-    border: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-#activeTableSelector{
-    font-weight: bold;
-    background-color: #FF4D0026;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-}
-th {
-    background-color: #f0f0f0; 
-    color: #000000B2;
-}
-th, td {
-    padding: 16px 0 16px 40px;
-    text-align: justify;
-    font-size: 18px;
-    align-items: center;
-    justify-content: center;
-}
-td:last-child{
-    color: #FF0000;
-    font-weight: bold;
+.TableSelectoButtons{
     display: flex;
-    align-items: center;
-    justify-content:flex-start;
-    gap: 7px;
-}
-td img{
-    width: 20px;
-    height: 20px;
-}
-th:first-child{
-    border-top-left-radius: 10px;
-}
-th:last-child{
-    border-top-right-radius: 10px;
+    justify-content: space-between;
 }
