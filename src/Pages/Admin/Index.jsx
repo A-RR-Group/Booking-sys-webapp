@@ -7,9 +7,11 @@ import InputField from "../../components/inputField"
 import Button from "../../components/button"
 import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly"
+import { useNavigate } from 'react-router-dom';
 
 export default function Adminlogin(){
     const [width, setWidth] = useState(window.innerWidth);
+    const navigate = useNavigate(); // move useNavigate inside the component
 
     // After page load on resize set new width 
     useEffect(() => {
@@ -22,6 +24,10 @@ export default function Adminlogin(){
         };
     }, []);
 
+    const handleLogin = () => {
+        navigate('/dashboard');
+    }
+
     if (width < 700) {
         return <DesktopOnly/>
     }else{
@@ -33,7 +39,7 @@ export default function Adminlogin(){
                         <InputField image={MailIcon} placeholder="Email address" type="email"></InputField>
                         <InputField image={LockIcon} placeholder="Password" type="password"></InputField>
                     </div>
-                    <Button text="Login" backgroundColor="#FF4D00"></Button>
+                    <Button text="Login" backgroundColor="#FF4D00" onClick={() => handleLogin()}></Button>
                 </div>
                 <div className="GoBackLink">
                     <div>

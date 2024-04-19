@@ -24,6 +24,10 @@ td div{
     align-items: center;
     justify-content:flex-start;
     gap: 7px;
+    cursor: pointer;
+}
+.editButton{
+    cursor: pointer;
 }
 td img{
     width: 20px;

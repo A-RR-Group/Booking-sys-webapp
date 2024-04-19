@@ -5,12 +5,22 @@ import PhoneIcon from "../../assets/Icons/phone.png"
 import Button from "../button"
 import PopupTitle from "../PopupTitle"
 import ListFormInput from "../ListFormInput"
+import { useRef } from "react"
 
-export default function AddExpress() {
+export default function AddExpress(props) {
+    const popupContainer = useRef()
+    const popupAll = useRef()
+
+    const closePopup = (e) =>{
+        if(!popupContainer.current.contains(e.target)){
+            props.togglePopup('');
+        }
+    }
+    
     return(
         <>
-        <div className="popupAll">
-            <div className="popupContainer">
+        <div className="popupAll" ref={popupAll} onClick={(e) => {closePopup(e)}}>
+            <div className="popupContainer" ref={popupContainer}>
                 <PopupTitle text="Add Express" color="#FF4D00"/>
                 <p></p>
                 <ListFormInput image={BusIcon} name="Express" type="text" blackets="Express name"/>
