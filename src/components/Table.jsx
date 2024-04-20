@@ -75,8 +75,6 @@ const StationsTable = (props) => {
 
     const handlePopup = (popupName, key) => {
         setActivePopup(popupName);
-        // console.log(popupName);
-        // console.log(key);
     };
 
     const style = {
@@ -98,8 +96,6 @@ const ExpressTable = (props) => {
 
     const handlePopup = (popupName, key) => {
         setActivePopup(popupName);
-        // console.log(popupName);
-        // console.log(key);
     };
 
     const style = {
