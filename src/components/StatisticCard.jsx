@@ -6,6 +6,7 @@ export default function StatisticCard(props) {
         borderRadius: props.position === "middle" ? "none" : "",
         borderBottomRightRadius: props.position === "end" ? "20px" : "",
         borderTopRightRadius: props.position === "end" ? "20px" : "",
+        borderRight: props.position === "end" ? "none" : "",
         borderBottomLeftRadius: props.position === "front" ? "20px" : "",
         borderTopLeftRadius: props.position === "front" ? "20px" : ""
     };
