@@ -1,4 +1,4 @@
-import "../assets/css/components/PageTitle.css"
+import "../../assets/css/components/pages/PageTitle.css"
 
 export default function PageTitle(props){
     return(

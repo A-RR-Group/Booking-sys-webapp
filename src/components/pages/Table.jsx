@@ -1,7 +1,7 @@
-import "../assets/css/components/Table.css";
-import DeleteIcon from "../assets/Icons/delete.png";
-import WriteIcon from "../assets/Icons/write.png";
+import "../../assets/css/components/pages/Table.css";
+import icons from "../../utils/icons"
 
+// Table headers components section
 const ExpressTableHeader = ({ columns }) => {
     return (
         <thead>
@@ -29,6 +29,7 @@ const StationTableHeader = ({ columns }) => {
     );
 };
 
+// Table content components section
 const StationTableContent = ({ entries, columns, handlePopup }) => {
     return (
         <tbody>
@@ -37,12 +38,12 @@ const StationTableContent = ({ entries, columns, handlePopup }) => {
                     <td>{entry.Bus_Station_name}</td>
                     <td>
                         <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Station', entry.id)}>
-                            <img src={WriteIcon} alt="Edit Icon" />&nbsp; Edit
+                            <img src={icons.WriteIcon} alt="Edit Icon" />&nbsp; Edit
                         </div>
                     </td>
                     <td>
                         <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus Station', entry.id)}>
-                            <img src={DeleteIcon} alt="Delete Icon" /> Remove
+                            <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
                 </tr>
@@ -61,7 +62,7 @@ const ExpressTableContent = ({ entries, columns, handlePopup }) => {
                     ))}
                     <td>
                         <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Express', entry.id)}>
-                            <img src={DeleteIcon} alt="Delete Icon" /> Remove
+                            <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
                 </tr>
@@ -70,6 +71,7 @@ const ExpressTableContent = ({ entries, columns, handlePopup }) => {
     );
 };
 
+// Only exported table components section
 const StationsTable = (props) => {
     const { columns, entries, setActivePopup } = props;
 

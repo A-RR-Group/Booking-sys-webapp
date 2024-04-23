@@ -1,4 +1,4 @@
-import "../assets/css/components/popupTitle.css"
+import "../../assets/css/components/pages/popupTitle.css"
 
 export default function PopupTitle(props){
     return(

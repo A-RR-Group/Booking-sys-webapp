@@ -1,12 +1,12 @@
-import CloseNotificationIcon from "../assets/Icons/closenotification.png"
-import "../assets/css/components/Notification.css"
+import icons from "../../utils/icons"
+import "../../assets/css/components/pages/Notification.css"
 
 export default function Notification(props){
     return(
         <>
             <div className="NotificationContainer">
                 <div>{props.message}</div>
-                <img src={CloseNotificationIcon} alt="" />
+                <img src={icons.CloseNotificationIcon} alt="" />
             </div>
         </>
     )

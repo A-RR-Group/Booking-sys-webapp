@@ -1,5 +1,5 @@
 import "../../assets/css/components/popups/AddEditComponents.css"
-import BusStationIcon from "../../assets/Icons/bus-station.png"
+import icons from "../../utils/icons"
 import Button from "../button"
 import PopupTitle from "../PopupTitle"
 import ListFormInput from "../ListFormInput"
@@ -9,6 +9,7 @@ export default function EditStation(props) {
     const popupAll = useRef()
     const popupContainer = useRef()
 
+    // Closing popup fuction
     const closePopup = (e) => {
         if(!popupContainer.current.contains(e.target)){
             props.togglePopup()
@@ -20,7 +21,7 @@ export default function EditStation(props) {
             <div className="popupContainer" ref={popupContainer}>
                 <PopupTitle text="Edit Bus-Station" color="#FF4D00"/>
                 <p></p>
-                <ListFormInput image={BusStationIcon} name="Station" type="text" blackets="Bus station name"/>
+                <ListFormInput image={icons.BusStationIcon} name="Station" type="text" blackets="Bus station name"/>
                 <p></p>
                 <Button text="Edit Station" backgroundColor="#FF4D00"></Button>
             </div>

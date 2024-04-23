@@ -1,5 +1,5 @@
-import AddIcon from "../assets/Icons/add.png";
-import "../assets/css/components/AdminAdd.css";
+import icons from "../../utils/icons"
+import "../../assets/css/components/pages/AdminAdd.css";
 
 export default function AdminAdd(props){
     const style = {
@@ -8,7 +8,7 @@ export default function AdminAdd(props){
 
     return(
         <div className="AdminAddDiv" style={style} onClick={props.clickHandler}>
-            <img src={AddIcon} alt="Add Icon" /> {props.text}
+            <img src={icons.AddIcon} alt="Add Icon" /> {props.text}
         </div>
     );
 }

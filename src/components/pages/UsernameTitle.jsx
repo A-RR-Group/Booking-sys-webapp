@@ -1,4 +1,4 @@
-import "../assets/css/components/UsernameTitle.css"
+import "../../assets/css/components/pages/UsernameTitle.css"
 
 export default function UsernameTitle(props){
     return(

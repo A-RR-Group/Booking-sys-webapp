@@ -1,4 +1,4 @@
-import "../assets/css/components/inputField.css"
+import "../../assets/css/components/forms/inputField.css"
 
 export default function InputField (props){
     return(

@@ -1,6 +1,7 @@
-import "../assets/css/components/StatisticCard.css"
+import "../../assets/css/components/pages/StatisticCard.css"
 
 export default function StatisticCard(props) {
+    // Checking the card position and setting it's styles
     const cardStyle = {
         borderRadius: props.position === "alone" ? "20px" : "",
         borderRadius: props.position === "middle" ? "none" : "",

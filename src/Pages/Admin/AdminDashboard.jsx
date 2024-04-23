@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import BlackBusIcon from "../../assets/Icons/black_bus.png";
-import BlackMoreIcon from "../../assets/Icons/black_more.png";
+import icons from "../../utils/icons"
 
 import StatisticCard from "../../components/StatisticCard";
 import TableSelector from "../../components/TableSelector";
@@ -97,8 +96,8 @@ export default function AdminDashboard() {
         <div className="AdminDashboardAll">
             {/* Admin Header */}
             <div className="AdminIconsDiv">
-                <img src={BlackBusIcon} alt="" />
-                <img src={BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
+                <img src={icons.BlackBusIcon} alt="" />
+                <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
                 {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => logout() }/> : ''}
             </div>
             {/* Admin Titles Division */}

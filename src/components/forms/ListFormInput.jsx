@@ -1,4 +1,4 @@
-import "../assets/css/components/ListFormInput.css"
+import "../../assets/css/components/forms/ListFormInput.css"
 
 export default function ListFormInput(props){
     return(

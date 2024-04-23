@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MailIcon from "../../assets/Icons/mail.png"
-import LockIcon from "../../assets/Icons/lock.png"
-import BusIcon from "../../assets/Icons/bus.png"
-import LeftIcon from "../../assets/Icons/left-arrow.png"
+import icons from "../../utils/icons"
 import InputField from "../../components/inputField"
 import Button from "../../components/button"
 import "../../assets/css/admin/LoginSignup.css"
@@ -11,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Adminlogin(){
     const [width, setWidth] = useState(window.innerWidth);
-    const navigate = useNavigate(); // move useNavigate inside the component
+    const navigate = useNavigate();
 
     // After page load on resize set new width 
     useEffect(() => {
@@ -28,22 +25,25 @@ export default function Adminlogin(){
         navigate('/dashboard');
     }
 
+    // Check width and render appropiate component
     if (width < 700) {
         return <DesktopOnly/>
     }else{
         return(
             <div className="all">
+                {/*  Login container  */}
                 <div className="LoginContainer">
-                    <img src={BusIcon} className="LogoOrange" alt="" />
+                    <img src={icons.BusIcon} className="LogoOrange" alt="" />
                     <div className="InputsDiv">
-                        <InputField image={MailIcon} placeholder="Email address" type="email"></InputField>
-                        <InputField image={LockIcon} placeholder="Password" type="password"></InputField>
+                        <InputField image={icons.MailIcon} placeholder="Email address" type="email"></InputField>
+                        <InputField image={icons.LockIcon} placeholder="Password" type="password"></InputField>
                     </div>
                     <Button text="Login" backgroundColor="#FF4D00" onClick={() => handleLogin()}></Button>
                 </div>
+                {/*  Under link to go back  */}
                 <div className="GoBackLink">
                     <div>
-                    <img src={LeftIcon} alt="" /> &nbsp; Lost your way? Go back to home
+                    <img src={icons.LeftIcon} alt="" /> &nbsp; Lost your way? Go back to home
                     </div>
                 </div>
             </div>

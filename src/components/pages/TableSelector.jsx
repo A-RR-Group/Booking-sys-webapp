@@ -1,6 +1,7 @@
-import "../assets/css/components/TableSelector.css";
+import "../../assets/css/components/pages/TableSelector.css";
 
 export default function TableSelector(props) {
+    // Checking the table selectors' states and positions + setting their styles
     let cardStyle = {
         backgroundColor: props.state === "active" ? "#FF4D0026" : "",
         fontWeight: props.state === "active" ? "bold" : "",
@@ -17,13 +18,6 @@ export default function TableSelector(props) {
     }
 
     return (
-        <div
-            className="TableSelectorContainer"
-            onClick={props.onClick}
-            state={props.state}
-            style={cardStyle}
-        >
-            {props.name}
-        </div>
+        <div className="TableSelectorContainer" onClick={props.onClick} state={props.state} style={cardStyle}> {props.name} </div>
     );
 }
