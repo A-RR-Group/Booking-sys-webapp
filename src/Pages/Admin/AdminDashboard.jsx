@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AdminDashboard() {
     const navigate = useNavigate()
-    const statsBarentry = [{'SMS Sent': '2,403'}, {'API Calls': '8,572'}, {'Todays Traffic': '3,406'}, {'Live Visitors':'102'}];
+    // const statsBarentry = [{'SMS Sent': '2,403'}, {'API Calls': '8,572'}, {'Todays Traffic': '3,406'}, {'Live Visitors':'102'}];
 
     // Table data definition
     const tableColumn1 = ['Express Name','Email Address', 'Telephone Number'];
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
         setActiveAddButton(tableSelectorName)
         setActiveTable(tableSelectorName)
     };
-    const handlePopup = (popupName, key) => {
+    const handlePopup = (popupName) => {
         setActivePopup(popupName);
     };
 
