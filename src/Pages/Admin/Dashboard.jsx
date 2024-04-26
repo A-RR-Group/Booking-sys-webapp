@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import icons from "../../utils/icons"
 
-import StatisticCard from "../../components/StatisticCard";
-import TableSelector from "../../components/TableSelector";
-import UsernameTitle from '../../components/UsernameTitle';
-import PageTitle from '../../components/PageTitle';
-import { ExpressTable, StationsTable } from '../../components/Table';
+import StatisticCard from "../../components/pages/StatisticCard";
+import TableSelector from "../../components/pages/TableSelector";
+import UsernameTitle from '../../components/pages/UsernameTitle';
+import PageTitle from '../../components/pages/PageTitle';
+import { ExpressTable, StationsTable } from '../../components/pages/Table';
 
-import "../../assets/css/admin/AdminDashboard.css";
-import AdminAdd from '../../components/AdminAdd';
+import "../../assets/css/admin/Dashboard.css";
+import AdminAdd from '../../components/pages/AdminAdd';
 import AddExpress from '../../components/popups/AddExpress';
 import AddStation from '../../components/popups/AddStationComponent';
 import EditStation from '../../components/popups/EditStationComponent';
 import RemoveBusStation from '../../components/popups/RemoveBusStation';
 import RemoveExpress from '../../components/popups/RemoveExpress';
-import AdminMore from '../../components/AdminMore';
+import AdminMore from '../../components/admin/AdminMore';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminDashboard() {

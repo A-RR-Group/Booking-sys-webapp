@@ -1,5 +1,5 @@
 import icons from "../../utils/icons"
-import "../../assets/css/components/AdminMore.css"
+import "../../assets/css/components/admin/AdminMore.css"
 import { useRef } from "react"
 
 export default function AdminMore(props){

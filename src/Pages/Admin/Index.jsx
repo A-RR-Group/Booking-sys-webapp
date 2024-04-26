@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import icons from "../../utils/icons"
-import InputField from "../../components/inputField"
-import Button from "../../components/button"
+import InputField from "../../components/forms/inputField"
+import Button from "../../components/forms/button"
 import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly"
 import { useNavigate } from 'react-router-dom';

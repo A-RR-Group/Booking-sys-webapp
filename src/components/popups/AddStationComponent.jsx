@@ -1,8 +1,8 @@
 import "../../assets/css/components/popups/AddEditComponents.css"
 import icons from "../../utils/icons"
-import Button from "../button"
-import PopupTitle from "../PopupTitle"
-import ListFormInput from "../ListFormInput"
+import Button from "../forms/button"
+import PopupTitle from "../pages/PopupTitle"
+import ListFormInput from "../forms/ListFormInput"
 import { useRef } from "react"
 
 export default function AddStation(props) {

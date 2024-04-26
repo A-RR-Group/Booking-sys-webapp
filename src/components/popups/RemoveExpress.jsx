@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import "../../assets/css/components/popups/RemoveComponents.css"
-import Button from "../button"
-import PopupTitle from "../PopupTitle"
+import Button from "../forms/button"
+import PopupTitle from "../pages/PopupTitle"
 
 export default function RemoveExpress(props) {
     const popupAll = useRef();

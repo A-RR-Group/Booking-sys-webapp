@@ -14,6 +14,7 @@ import UserIcon from "../assets/Icons/user.png"
 import LeftIcon from "../assets/Icons/left-arrow.png"
 import DesktopIcon from "../assets/Icons/desktop.png"
 import ResizeIcon from "../assets/Icons/resize.png";
+import CapacityIcon from "../assets/Icons/capacity.png"
 
 export default { 
     BlackBusIcon,
@@ -31,5 +32,6 @@ export default {
     UserIcon,
     LeftIcon,
     DesktopIcon,
-    ResizeIcon 
+    ResizeIcon,
+    CapacityIcon
 }

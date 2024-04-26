@@ -2,6 +2,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     border-radius: 10px 10px 0 0;
+    font-family: sans-serif;
 }
 th {
     background-color: #f0f0f0; 
@@ -29,6 +30,21 @@ td div{
 .editButton{
     cursor: pointer;
 }
+
+.ridesTableContent tr td:first-child,
+.ridesTableContent tr td:last-child{
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.ridesTableContent tr td:nth-last-child(2) {
+    font-weight: bold;
+    color: #FF4D00;
+}
+.canceledTableContent tr td:nth-last-child(-n + 3):not(:last-child),
+.bookingsTableContent tr td:nth-last-child(-n + 3):not(:last-child){
+    font-weight: bold;
+}
+
 td img{
     width: 20px;
     height: 20px;
