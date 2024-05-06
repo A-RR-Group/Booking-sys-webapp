@@ -1,0 +1,64 @@
+.RideRepeat{
+    display: flex;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: absolute;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 2px;
+    margin: 300px 0 0 125px;
+}
+.RideRepeat div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px 0 20px;
+    font-family: sans-serif;
+}
+.RideRepeat div:last-child{
+    padding-bottom: 10px;
+}
+.RideRepeatBy{
+    color: #FF4D00;
+}
+.LocationsDashedLine{
+    height: 20px;
+    width: 1px;
+    margin: -20px 0 -20px 9.4px;
+}
+
+.TimeInput{
+    display: flex;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: fixed;
+    padding: 10px;
+    flex-direction: column;
+    font-family: sans-serif;
+    font-size: 14px;
+    border-radius: 8px;
+    gap: 2px;
+    margin: 260px 0 0 125px;
+}
+.TimeInputDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 10px;
+    font-size: 30px;
+    color: #FF4D00;
+}
+.TimeInputDiv input{
+    padding: 5px 0 0 0;
+    width: 30px;
+    height: 30px;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    color: #FF4D00;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 0;
+}

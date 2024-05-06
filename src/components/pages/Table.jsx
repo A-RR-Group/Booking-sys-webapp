@@ -123,11 +123,11 @@ const RidesTableContent = ({ entries, columns}) => {
     );
 };
 
-const CanceledTableContent = ({ entries, columns}) => {
+const CanceledTableContent = ({ entries, columns }) => {
     return (
         <tbody className="canceledTableContent">
             {entries.map((entry) => (
-                <tr key={entry.id}>
+                <tr key={entry.id}> {/* Assigning unique key */}
                     {columns.map((column) => (
                         <td key={column}>{entry[column]}</td>
                     ))}
@@ -270,7 +270,10 @@ const BookingsTable = (props) => {
 };
 
 const BusesTable = (props) => {
-    const { columns, entries } = props;
+    const { columns, entries, setActivePopup } = props;
+    const handlePopup = (popupName, key) => {
+        setActivePopup(popupName);
+    };
 
     const style = {
         display: props.state !== "active" ? "none" : "",
@@ -281,7 +284,7 @@ const BusesTable = (props) => {
     return (
         <table style={style}>
             <BusesTableHeader columns={columns} />
-            <BusesTableContent entries={entries} columns={columns}/>
+            <BusesTableContent entries={entries} columns={columns} handlePopup={handlePopup}/>
         </table>
     );
 };

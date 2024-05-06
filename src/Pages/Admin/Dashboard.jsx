@@ -16,6 +16,7 @@ import RemoveBusStation from '../../components/popups/RemoveBusStation';
 import RemoveExpress from '../../components/popups/RemoveExpress';
 import AdminMore from '../../components/admin/AdminMore';
 import { useNavigate } from 'react-router-dom';
+import Adminlogin from './Index';
 
 export default function AdminDashboard() {
     const navigate = useNavigate()
@@ -67,6 +68,7 @@ export default function AdminDashboard() {
 
     const [activePopup, setActivePopup] = useState('');
     const [activeMore, setMore] = useState(false);
+    const [logedIn, setLogedIn] = useState (false);
 
     // States Handler
     const handleTableSelector = (tableSelectorName) => {
@@ -79,56 +81,69 @@ export default function AdminDashboard() {
     };
 
     // Functions Declaration & Definition
-    const logout = () => {
-        navigate('/admin');
+    const login = (InOrOut) => {
+        // navigate('/express');
+        if(InOrOut){
+            setLogedIn(true);
+        }else{
+            setLogedIn(false);
+        }
     }
 
-    return (
-        <>
-        {/* Checking the active popup state and popup rendering */}
-        {activePopup == "Add Express" ? <AddExpress togglePopup={setActivePopup}/>: ''}
-        {activePopup == "Add Station" ? <AddStation togglePopup={setActivePopup}/>: ''}
-        {activePopup == "Edit Station" ? <EditStation togglePopup={setActivePopup}/>: ''}
-        {activePopup == "Remove Bus Station" ? <RemoveBusStation togglePopup={setActivePopup}/>: ''}
-        {activePopup == "Remove Express" ? <RemoveExpress togglePopup={setActivePopup}/>: ''}
-        
-        {/* Whole admin page division container */}
-        <div className="AdminDashboardAll">
-            {/* Admin Header */}
-            <div className="AdminIconsDiv">
-                <img src={icons.BlackBusIcon} alt="" />
-                <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
-                {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => logout() }/> : ''}
-            </div>
-            {/* Admin Titles Division */}
-            <div className="AdminTitles">
-                <div className="AdminName">       
-                    <PageTitle title="Administrator Dashboard"/>
-                    <UsernameTitle username="Elite Carlson"/>
+    if(!logedIn){
+        return(
+            <>
+                <Adminlogin login={login}/>
+            </>
+        )
+    }else{
+        return (
+            <>
+            {/* Checking the active popup state and popup rendering */}
+            {activePopup == "Add Express" ? <AddExpress togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Add Station" ? <AddStation togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Edit Station" ? <EditStation togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Remove Bus Station" ? <RemoveBusStation togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Remove Express" ? <RemoveExpress togglePopup={setActivePopup}/>: ''}
+            
+            {/* Whole admin page division container */}
+            <div className="AdminDashboardAll">
+                {/* Admin Header */}
+                <div className="AdminIconsDiv">
+                    <img src={icons.BlackBusIcon} alt="" />
+                    <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
+                    {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => login(false) }/> : ''}
                 </div>
-            </div>
-            {/* Statictics Division */}
-            <div className="AdminSystemStatistics">
-                <StatisticCard numbers="2,403" category="SMS Sent" position="front"/>
-                <StatisticCard numbers="8,572" category="API Calls" position="middle"/>
-                <StatisticCard numbers="3,406" category="Todays Traffic" position="middle"/>
-                <StatisticCard numbers="102" category="Live Visitors" position="end"/>
-            </div>
-            {/* Table Selectors & add buttons Division */}
-            <div className="TableSelectoButtons">
-                <div className="AdminTableSelector">
-                    <TableSelector name="Express" position="front" onClick={() => handleTableSelector('Express')} state={activeTableSelector === 'Express' ? 'active' : ''}/>
-                    <TableSelector name="Bus Stations" position="end" onClick={() => handleTableSelector('Bus Stations')} state={activeTableSelector === 'Bus Stations' ? 'active' : ''}/>
+                {/* Admin Titles Division */}
+                <div className="AdminTitles">
+                    <div className="AdminName">       
+                        <PageTitle title="Administrator Dashboard"/>
+                        <UsernameTitle username="Elite Carlson"/>
+                    </div>
                 </div>
-                <div className="AdminTableButtons">
-                    <AdminAdd clickHandler={() => handlePopup('Add Express')} state={activeAddButton === 'Express' ? 'active' : ''}  text="Add Express"/>
-                    <AdminAdd clickHandler={() => handlePopup('Add Station')} state={activeAddButton === 'Bus Stations' ? 'active' : ''}text="Add Bus station"/><br/><br/>
+                {/* Statictics Division */}
+                <div className="AdminSystemStatistics">
+                    <StatisticCard numbers="2,403" category="SMS Sent" position="front"/>
+                    <StatisticCard numbers="8,572" category="API Calls" position="middle"/>
+                    <StatisticCard numbers="3,406" category="Todays Traffic" position="middle"/>
+                    <StatisticCard numbers="102" category="Live Visitors" position="end"/>
                 </div>
+                {/* Table Selectors & add buttons Division */}
+                <div className="TableSelectoButtons">
+                    <div className="AdminTableSelector">
+                        <TableSelector name="Express" position="front" onClick={() => handleTableSelector('Express')} state={activeTableSelector === 'Express' ? 'active' : ''}/>
+                        <TableSelector name="Bus Stations" position="end" onClick={() => handleTableSelector('Bus Stations')} state={activeTableSelector === 'Bus Stations' ? 'active' : ''}/>
+                    </div>
+                    <div className="AdminTableButtons">
+                        <AdminAdd clickHandler={() => handlePopup('Add Express')} state={activeAddButton === 'Express' ? 'active' : ''}  text="Add Express"/>
+                        <AdminAdd clickHandler={() => handlePopup('Add Station')} state={activeAddButton === 'Bus Stations' ? 'active' : ''}text="Add Bus station"/><br/><br/>
+                    </div>
+                </div>
+                {/* All admin tables */}
+                <ExpressTable state={activeTable === 'Express' ? 'active' : ''} columns={tableColumn1} entries={entry1} setActivePopup={setActivePopup}/>
+                <StationsTable state={activeTable === 'Bus Stations' ? 'active' : ''} columns={tableColumn2} entries = {entry2} setActivePopup={setActivePopup}/>
             </div>
-            {/* All admin tables */}
-            <ExpressTable state={activeTable === 'Express' ? 'active' : ''} columns={tableColumn1} entries={entry1} setActivePopup={setActivePopup}/>
-            <StationsTable state={activeTable === 'Bus Stations' ? 'active' : ''} columns={tableColumn2} entries = {entry2} setActivePopup={setActivePopup}/>
-        </div>
-        </>
-    );
+            </>
+        );
+    }
 }

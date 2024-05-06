@@ -4,11 +4,10 @@ import InputField from "../../components/forms/inputField"
 import Button from "../../components/forms/button"
 import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly"
-import { useNavigate } from 'react-router-dom';
 
-export default function Adminlogin(){
+export default function Adminlogin(props){
+    const { login } = props
     const [width, setWidth] = useState(window.innerWidth);
-    const navigate = useNavigate();
 
     // After page load on resize set new width 
     useEffect(() => {
@@ -21,8 +20,8 @@ export default function Adminlogin(){
         };
     }, []);
 
-    const handleLogin = () => {
-        navigate('/dashboard');
+    const handleLogin = (param) => {
+        login(param);
     }
 
     // Check width and render appropiate component
@@ -38,7 +37,7 @@ export default function Adminlogin(){
                         <InputField image={icons.MailIcon} placeholder="Email address" type="email"></InputField>
                         <InputField image={icons.LockIcon} placeholder="Password" type="password"></InputField>
                     </div>
-                    <Button text="Login" backgroundColor="#FF4D00" onClick={() => handleLogin()}></Button>
+                    <Button text="Login" backgroundColor="#FF4D00" onClick={() => handleLogin(true)}></Button>
                 </div>
                 {/*  Under link to go back  */}
                 <div className="GoBackLink">

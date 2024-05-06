@@ -5,14 +5,18 @@ import StatisticCard from "../../components/pages/StatisticCard";
 import TableSelector from "../../components/pages/TableSelector";
 import UsernameTitle from '../../components/pages/UsernameTitle';
 import PageTitle from '../../components/pages/PageTitle';
-import { BookingsTable, RidesTable, CanceledTable, StationsTable, BusesTable } from '../../components/pages/Table';
+import { BookingsTable, RidesTable, CanceledTable, BusesTable } from '../../components/pages/Table';
 
 import "../../assets/css/admin/Dashboard.css";
-import ExpressMore from '../../components/admin/AdminMore';
+import AdminMore from '../../components/admin/AdminMore';
 import { useNavigate } from 'react-router-dom';
 import AdminAdd from '../../components/pages/AdminAdd';
 import PopupTitle from '../../components/pages/PopupTitle';
 import AddBus from '../../components/popups/AddBus';
+import RemoveBus from '../../components/popups/RemoveBus';
+import EditBus from '../../components/popups/EditBus';
+import AddRide from '../../components/popups/AddRide';
+import ExpressLogin from './Login';
 
 export default function ExpressDashboard(){
     const navigate = useNavigate()
@@ -127,6 +131,7 @@ export default function ExpressDashboard(){
 
     const [activePopup, setActivePopup] = useState('');
     const [activeMore, setMore] = useState(false);
+    const [logedIn, setLogedIn] = useState (true);
 
     // States Handler
     const handleTableSelector = (tableSelectorName) => {
@@ -139,60 +144,74 @@ export default function ExpressDashboard(){
     };
 
     // Functions Declaration & Definition
-    const logout = () => {
-        navigate('/express');
+    const login = (InOrOut) => {
+        // navigate('/express');
+        if(InOrOut){
+            setLogedIn(true);
+        }else{
+            setLogedIn(false);
+        }
     }
 
-    return (
-        <>
-        {/* Checking the active popup state and popup rendering */}
-        {/* {activePopup == "Add Bus" ? <AddBus togglePopup={setActivePopup}/>: ''} */}
-        
-        {/* Whole admin page division container */}
-        <div className="AdminDashboardAll">
-            {/* Admin Header */}
-            <div className="AdminIconsDiv">
-                <img src={icons.BlackBusIcon} alt="" />
-                <div style={{display: "flex", flexDirection: "row", gap: "45px"}}>
-                    <PopupTitle text="Add ride" color="#FF4D00"/>
-                    <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
+    if(!logedIn){
+        return(
+            <>
+                <ExpressLogin login={login}/>
+            </>
+        )
+    }else{
+        return (
+            <>
+            {/* Checking the active popup state and popup rendering */}
+            {activePopup == "Add Bus" ? <AddBus togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Add Ride" ? <AddRide togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Remove Bus" ? <RemoveBus togglePopup={setActivePopup}/>: ''}
+            {activePopup == "Edit Bus" ? <EditBus togglePopup={setActivePopup}/>: ''}
+            
+            {/* Whole admin page division container */}
+            <div className="AdminDashboardAll">
+                {/* Admin Header */}
+                <div className="AdminIconsDiv">
+                    <img src={icons.BlackBusIcon} alt="" />
+                    <div style={{display: "flex", flexDirection: "row", gap: "45px"}}>
+                        <PopupTitle text="Add Ride" color="#FF4D00" onClick={() => handlePopup ('Add Ride')} cursor="pointer"/>
+                        <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
+                    </div>
+                    {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => login(false) }/> : ''}
                 </div>
-                {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => logout() }/> : ''}
-            </div>
-            {/* Admin Titles Division */}
-            <div className="AdminTitles">
-                <div className="AdminName">       
-                    <PageTitle title="Volcano Expres LTD"/>
-                    <div style={{display: "flex",flexDirection: "row", alignItems: "baseline", gap: "5px", fontSize: "20px"}}><UsernameTitle username="76,304 Trips"/> <p className="Trip_Dates">(Jan 21 - Feb 20)</p></div>
+                {/* Admin Titles Division */}
+                <div className="AdminTitles">
+                    <div className="AdminName">       
+                        <PageTitle title="Volcano Expres LTD"/>
+                        <div style={{display: "flex",flexDirection: "row", alignItems: "baseline", gap: "5px", fontSize: "20px"}}><UsernameTitle username="76,304 Trips"/> <p className="Trip_Dates">(Jan 21 - Feb 20)</p></div>
+                    </div>
                 </div>
-            </div>
-            {/* Statictics Division */}
-            <div className="AdminSystemStatistics">
-                <StatisticCard numbers="2/23" category="Completed Rides" position="front"/>
-                <StatisticCard numbers="58" category="Passengers" position="middle"/>
-                <StatisticCard numbers="79" category="Bookings" position="middle"/>
-                <StatisticCard numbers="4" category="Live Rides" position="end"/>
-            </div>
-            {/* Table Selectors & add buttons Division */}
-            <div className="TableSelectoButtons">
-                <div className="AdminTableSelector">
-                    <TableSelector name="Bookings" position="front" onClick={() => handleTableSelector('Bookings')} state={activeTableSelector === 'Bookings' ? 'active' : ''}/>
-                    <TableSelector name="Canceled" position="middle" onClick={() => handleTableSelector('Canceled')} state={activeTableSelector === 'Canceled' ? 'active' : ''}/>
-                    <TableSelector name="Rides" position="middle" onClick={() => handleTableSelector('Rides')} state={activeTableSelector === 'Rides' ? 'active' : ''}/>
-                    <TableSelector name="Buses" position="end" onClick={() => handleTableSelector('Buses')} state={activeTableSelector === 'Buses' ? 'active' : ''}/>
+                {/* Statictics Division */}
+                <div className="AdminSystemStatistics">
+                    <StatisticCard numbers="2/23" category="Completed Rides" position="front"/>
+                    <StatisticCard numbers="58" category="Passengers" position="middle"/>
+                    <StatisticCard numbers="79" category="Bookings" position="middle"/>
+                    <StatisticCard numbers="4" category="Live Rides" position="end"/>
                 </div>
-                <div className="AdminTableButtons">
-                    <AdminAdd clickHandler={() => handlePopup('Add Bus')} state={activeAddButton === 'Buses' ? 'active' : ''}  text="Add Bus"/><br/><br/>
+                {/* Table Selectors & add buttons Division */}
+                <div className="TableSelectoButtons">
+                    <div className="AdminTableSelector">
+                        <TableSelector name="Bookings" position="front" onClick={() => handleTableSelector('Bookings')} state={activeTableSelector === 'Bookings' ? 'active' : ''}/>
+                        <TableSelector name="Canceled" position="middle" onClick={() => handleTableSelector('Canceled')} state={activeTableSelector === 'Canceled' ? 'active' : ''}/>
+                        <TableSelector name="Rides" position="middle" onClick={() => handleTableSelector('Rides')} state={activeTableSelector === 'Rides' ? 'active' : ''}/>
+                        <TableSelector name="Buses" position="end" onClick={() => handleTableSelector('Buses')} state={activeTableSelector === 'Buses' ? 'active' : ''}/>
+                    </div>
+                    <div className="AdminTableButtons">
+                        <AdminAdd clickHandler={() => handlePopup('Add Bus')} state={activeAddButton === 'Buses' ? 'active' : ''}  text="Add Bus"/><br/><br/>
+                    </div>
                 </div>
+                {/* All express tables */}
+                <BookingsTable state={activeTable === 'Bookings' ? 'active' : ''} columns={bookingColumn} entries = {bookingEntry}/>
+                <CanceledTable state={activeTable === 'Canceled' ? 'active' : ''} columns={canceledColumn} entries = {canceledEntry}/>
+                <RidesTable state={activeTable === 'Rides' ? 'active' : ''} columns={rideColumn} entries = {rideEntry}/>
+                <BusesTable state={activeTable === 'Buses' ? 'active' : ''} columns={busColumn} entries = {busEntry} setActivePopup={setActivePopup}/>
             </div>
-            {/* All admin tables */}
-            {/* <ExpressTable state={activeTable === 'Express' ? 'active' : ''} columns={tableColumn1} entries={entry1} setActivePopup={setActivePopup}/> */}
-            {/* <StationsTable state={activeTable === 'Bus Stations' ? 'active' : ''} columns={tableColumn2} entries = {entry2} setActivePopup={setActivePopup}/> */}
-            <BookingsTable state={activeTable === 'Bookings' ? 'active' : ''} columns={bookingColumn} entries = {bookingEntry}/>
-            <CanceledTable state={activeTable === 'Canceled' ? 'active' : ''} columns={canceledColumn} entries = {canceledEntry}/>
-            <RidesTable state={activeTable === 'Rides' ? 'active' : ''} columns={rideColumn} entries = {rideEntry}/>
-            <BusesTable state={activeTable === 'Buses' ? 'active' : ''} columns={busColumn} entries = {busEntry} setActivePopup={setActivePopup}/>
-        </div>
-        </>
-    );
+            </>
+        );
+    }
 }

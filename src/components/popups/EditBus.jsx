@@ -5,7 +5,7 @@ import PopupTitle from "../pages/PopupTitle"
 import {ListFormInput} from "../forms/ListFormInput"
 import { useRef } from "react"
 
-export default function EditStation(props) {
+export default function EditBus(props) {
     const popupAll = useRef()
     const popupContainer = useRef()
 
@@ -19,11 +19,13 @@ export default function EditStation(props) {
         <>
         <div className="popupAll" ref={popupAll} onClick={(e) => closePopup(e)}>
             <div className="popupContainer" ref={popupContainer}>
-                <PopupTitle text="Edit Bus-Station" color="#FF4D00"/>
+                <PopupTitle text="Edit Bus Info" color="#FF4D00"/>
                 <p></p>
-                <ListFormInput image={icons.BusStationIcon} name="Station" type="text" blackets="Bus station name"/>
+                <ListFormInput image={icons.BusIcon} name="Bus" type="text" blackets="Plate number"/>
+                <ListFormInput image={icons.LockIcon} name="Password" type="Password" blackets="Password"/>
+                <ListFormInput image={icons.CapacityIcon} name="Capacity" type="number" blackets="Capacity"/>
                 <p></p>
-                <Button text="Edit Station" backgroundColor="#FF4D00"></Button>
+                <Button text="Edit Bus" backgroundColor="#FF4D00"></Button>
             </div>
         </div>
         </>

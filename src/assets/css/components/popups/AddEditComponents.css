@@ -17,3 +17,8 @@
     border-radius: 8px;
     gap: 20px;
 }
+.LocationsDashedLine{
+    height: 20px;
+    width: 1px;
+    margin: -20px 0 -20px 9.4px;
+}

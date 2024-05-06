@@ -4,21 +4,13 @@ import PopupTitle from "../../components/pages/PopupTitle"
 import Button from "../../components/forms/button"
 
 import "../../assets/css/express/Login.css"
-import { useNavigate } from "react-router-dom"
 
-export default function AddExpress(props) {
+export default function ExpressLogin(props) {
 
-    const navigate = useNavigate();
+    const { login } = props;
 
-    // Closing popup fuction
-    const closePopup = (e) =>{
-        if(!popupContainer.current.contains(e.target)){
-            props.togglePopup('');
-        }
-    }
-
-    const handleLogin = () => {
-        navigate('/express/dashboard');
+    const handleLogin = (param) => {
+        login(param)
     }
     
     return(
@@ -31,7 +23,7 @@ export default function AddExpress(props) {
                     <InputField image={icons.MailIcon} placeholder="Email address" type="email"></InputField>
                     <InputField image={icons.LockIcon} placeholder="Password" type="password"></InputField>
                 </div>
-                <Button text="Login" backgroundColor="#FF4D00" onClick={() => handleLogin()}></Button>
+                <Button text="Login" backgroundColor="#FF4D00" onClick={() => handleLogin(true)}></Button>
             </div>
         </div>
         </>

@@ -13,8 +13,14 @@ import LockIcon from "../assets/Icons/lock.png"
 import UserIcon from "../assets/Icons/user.png"
 import LeftIcon from "../assets/Icons/left-arrow.png"
 import DesktopIcon from "../assets/Icons/desktop.png"
-import ResizeIcon from "../assets/Icons/resize.png";
+import ResizeIcon from "../assets/Icons/resize.png"
 import CapacityIcon from "../assets/Icons/capacity.png"
+import CurrentLocationIcon from "../assets/Icons/current-location.png"
+import RepeatIcon from "../assets/Icons/repeat.png"
+import LocationIcon from "../assets/Icons/location.png"
+import DollarIcon from "../assets/Icons/dollar-symbol.png"
+import ClockIcon from "../assets/Icons/clock.png"
+import DashedLineIcon from "../assets/Icons/dashed-line.png"
 
 export default { 
     BlackBusIcon,
@@ -33,5 +39,11 @@ export default {
     LeftIcon,
     DesktopIcon,
     ResizeIcon,
-    CapacityIcon
+    CapacityIcon,
+    CurrentLocationIcon,
+    RepeatIcon,
+    LocationIcon,
+    DollarIcon,
+    ClockIcon,
+    DashedLineIcon
 }
