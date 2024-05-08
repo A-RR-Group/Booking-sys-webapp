@@ -182,7 +182,7 @@ export default function ExpressDashboard(){
                 {/* Admin Titles Division */}
                 <div className="AdminTitles">
                     <div className="AdminName">       
-                        <PageTitle title="Volcano Expres LTD"/>
+                        <PageTitle title="Volcano Express LTD"/>
                         <div style={{display: "flex",flexDirection: "row", alignItems: "baseline", gap: "5px", fontSize: "20px"}}><UsernameTitle username="76,304 Trips"/> <p className="Trip_Dates">(Jan 21 - Feb 20)</p></div>
                     </div>
                 </div>

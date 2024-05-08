@@ -2,11 +2,9 @@ import icons from "../../utils/icons"
 import InputField from "../../components/forms/inputField"
 import PopupTitle from "../../components/pages/PopupTitle"
 import Button from "../../components/forms/button"
-
 import "../../assets/css/express/Login.css"
 
 export default function ExpressLogin(props) {
-
     const { login } = props;
 
     const handleLogin = (param) => {
