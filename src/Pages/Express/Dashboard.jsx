@@ -4,12 +4,10 @@ import icons from "../../utils/icons"
 import StatisticCard from "../../components/pages/StatisticCard";
 import TableSelector from "../../components/pages/TableSelector";
 import UsernameTitle from '../../components/pages/UsernameTitle';
-import PageTitle from '../../components/pages/PageTitle';
 import { BookingsTable, RidesTable, CanceledTable, BusesTable } from '../../components/pages/Table';
 
 import "../../assets/css/admin/Dashboard.css";
 import AdminMore from '../../components/admin/AdminMore';
-import { useNavigate } from 'react-router-dom';
 import AdminAdd from '../../components/pages/AdminAdd';
 import PopupTitle from '../../components/pages/PopupTitle';
 import AddBus from '../../components/popups/AddBus';
@@ -19,8 +17,6 @@ import AddRide from '../../components/popups/AddRide';
 import ExpressLogin from './Login';
 
 export default function ExpressDashboard(){
-    const navigate = useNavigate()
-    // const statsBarentry = [{'SMS Sent': '2,403'}, {'API Calls': '8,572'}, {'Todays Traffic': '3,406'}, {'Live Visitors':'102'}];
 
     // Table data definition
     const busColumn = ['License Plate', 'Password', 'Capacity'];
@@ -129,7 +125,7 @@ export default function ExpressDashboard(){
     const [activeAddButton, setActiveAddButton] = useState('');
     const [activeTable, setActiveTable] = useState('Bookings');
 
-    const [activePopup, setActivePopup] = useState('');
+    const [activePopup, setActivePopup] = useState([]);
     const [activeMore, setMore] = useState(false);
     const [logedIn, setLogedIn] = useState (true);
 
@@ -140,7 +136,7 @@ export default function ExpressDashboard(){
         setActiveTable(tableSelectorName)
     };
     const handlePopup = (popupName) => {
-        setActivePopup(popupName);
+        setActivePopup([popupName]);
     };
 
     // Functions Declaration & Definition
@@ -163,10 +159,10 @@ export default function ExpressDashboard(){
         return (
             <>
             {/* Checking the active popup state and popup rendering */}
-            {activePopup == "Add Bus" ? <AddBus togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Add Ride" ? <AddRide togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Remove Bus" ? <RemoveBus togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Edit Bus" ? <EditBus togglePopup={setActivePopup}/>: ''}
+            {activePopup[0] == "Add Bus" ? <AddBus togglePopup={setActivePopup} subject={activePopup}/>: ''}
+            {activePopup[0] == "Add Ride" ? <AddRide togglePopup={setActivePopup} subject={activePopup}/>: ''}
+            {activePopup[0] == "Remove Bus" ? <RemoveBus togglePopup={setActivePopup} subject={activePopup}/>: ''}
+            {activePopup[0] == "Edit Bus" ? <EditBus togglePopup={setActivePopup} subject={activePopup}/>: ''}
             
             {/* Whole admin page division container */}
             <div className="AdminDashboardAll">
@@ -182,7 +178,7 @@ export default function ExpressDashboard(){
                 {/* Admin Titles Division */}
                 <div className="AdminTitles">
                     <div className="AdminName">       
-                        <PageTitle title="Volcano Express LTD"/>
+                        <h1 className="PageTitle">Volcano Express LTD</h1>
                         <div style={{display: "flex",flexDirection: "row", alignItems: "baseline", gap: "5px", fontSize: "20px"}}><UsernameTitle username="76,304 Trips"/> <p className="Trip_Dates">(Jan 21 - Feb 20)</p></div>
                     </div>
                 </div>

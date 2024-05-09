@@ -4,7 +4,6 @@ import icons from "../../utils/icons"
 import StatisticCard from "../../components/pages/StatisticCard";
 import TableSelector from "../../components/pages/TableSelector";
 import UsernameTitle from '../../components/pages/UsernameTitle';
-import PageTitle from '../../components/pages/PageTitle';
 import { ExpressTable, StationsTable } from '../../components/pages/Table';
 
 import "../../assets/css/admin/Dashboard.css";
@@ -15,12 +14,9 @@ import EditStation from '../../components/popups/EditStationComponent';
 import RemoveBusStation from '../../components/popups/RemoveBusStation';
 import RemoveExpress from '../../components/popups/RemoveExpress';
 import AdminMore from '../../components/admin/AdminMore';
-import { useNavigate } from 'react-router-dom';
 import Adminlogin from './Index';
 
 export default function AdminDashboard() {
-    const navigate = useNavigate()
-    // const statsBarentry = [{'SMS Sent': '2,403'}, {'API Calls': '8,572'}, {'Todays Traffic': '3,406'}, {'Live Visitors':'102'}];
 
     // Table data definition
     const tableColumn1 = ['Express Name','Email Address', 'Telephone Number'];
@@ -48,16 +44,16 @@ export default function AdminDashboard() {
     const entry2 = [
         {
             id: 1,
-            'Bus_Station_name': 'Kigali-Remera',
+            'Name': 'Kigali-Remera',
             
         },
         {
             id: 2,
-            'Bus_Station_name': 'Kigali-Downtown',
+            'Name': 'Kigali-Downtown',
         },
         {
             id: 3,
-            'Bus_Station_name': 'Kigali-Nyabugogo',
+            'Name': 'Kigali-Nyabugogo',
         }
     ]
 
@@ -66,7 +62,7 @@ export default function AdminDashboard() {
     const [activeAddButton, setActiveAddButton] = useState('Express');
     const [activeTable, setActiveTable] = useState('Express');
 
-    const [activePopup, setActivePopup] = useState('');
+    const [activePopup, setActivePopup] = useState([]);
     const [activeMore, setMore] = useState(false);
     const [logedIn, setLogedIn] = useState (false);
 
@@ -77,7 +73,7 @@ export default function AdminDashboard() {
         setActiveTable(tableSelectorName)
     };
     const handlePopup = (popupName) => {
-        setActivePopup(popupName);
+        setActivePopup([popupName]);
     };
 
     // Functions Declaration & Definition
@@ -100,11 +96,11 @@ export default function AdminDashboard() {
         return (
             <>
             {/* Checking the active popup state and popup rendering */}
-            {activePopup == "Add Express" ? <AddExpress togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Add Station" ? <AddStation togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Edit Station" ? <EditStation togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Remove Bus Station" ? <RemoveBusStation togglePopup={setActivePopup}/>: ''}
-            {activePopup == "Remove Express" ? <RemoveExpress togglePopup={setActivePopup}/>: ''}
+            {activePopup[0] == "Add Express" ? <AddExpress togglePopup={setActivePopup}/>: ''}
+            {activePopup[0] == "Add Station" ? <AddStation togglePopup={setActivePopup}/>: ''}
+            {activePopup[0] == "Edit Station" ? <EditStation togglePopup={setActivePopup} subject={activePopup}/>: ''}
+            {activePopup[0] == "Remove Bus Station" ? <RemoveBusStation togglePopup={setActivePopup} subject={activePopup}/>: ''}
+            {activePopup[0] == "Remove Express" ? <RemoveExpress togglePopup={setActivePopup} subject={activePopup}/>: ''}
             
             {/* Whole admin page division container */}
             <div className="AdminDashboardAll">
@@ -117,7 +113,7 @@ export default function AdminDashboard() {
                 {/* Admin Titles Division */}
                 <div className="AdminTitles">
                     <div className="AdminName">       
-                        <PageTitle title="Administrator Dashboard"/>
+                        <h1 className="PageTitle">Administrator Dashboard</h1>
                         <UsernameTitle username="Elite Carlson"/>
                     </div>
                 </div>

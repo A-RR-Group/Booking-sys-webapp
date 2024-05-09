@@ -12,7 +12,7 @@ export default function EditStation(props) {
     // Closing popup fuction
     const closePopup = (e) => {
         if(!popupContainer.current.contains(e.target)){
-            props.togglePopup()
+            props.togglePopup([])
         }
     }
     return(
@@ -21,7 +21,7 @@ export default function EditStation(props) {
             <div className="popupContainer" ref={popupContainer}>
                 <PopupTitle text="Edit Bus-Station" color="#FF4D00"/>
                 <p></p>
-                <ListFormInput image={icons.BusStationIcon} name="Station" type="text" blackets="Bus station name"/>
+                <ListFormInput image={icons.BusStationIcon} name="Station" type="text" blackets={props.subject[1]}/>
                 <p></p>
                 <Button text="Edit Station" backgroundColor="#FF4D00"></Button>
             </div>

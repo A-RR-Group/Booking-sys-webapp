@@ -68,19 +68,19 @@ const BusesTableHeader = ({ columns }) => {
 };
 
 // Table content components section
-const StationTableContent = ({ entries, columns, handlePopup }) => {
+const StationTableContent = ({ entries, handlePopup }) => {
     return (
         <tbody>
             {entries.map((entry) => (
                 <tr key={entry.id}>
-                    <td>{entry.Bus_Station_name}</td>
+                    <td>{entry.Name}</td>
                     <td>
-                        <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Station', entry.id)}>
+                        <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Station', entry["Name"], entry.id)}>
                             <img src={icons.WriteIcon} alt="Edit Icon" />&nbsp; Edit
                         </div>
                     </td>
                     <td>
-                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus Station', entry.id)}>
+                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus Station', entry["Name"], entry.id)}>
                             <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
@@ -99,7 +99,7 @@ const ExpressTableContent = ({ entries, columns, handlePopup }) => {
                         <td key={column}>{entry[column]}</td>
                     ))}
                     <td>
-                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Express', entry.id)}>
+                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Express', entry["Express Name"], entry.id)}>
                             <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
@@ -160,12 +160,12 @@ const BusesTableContent = ({ entries, columns, handlePopup }) => {
                         <td key={column}>{entry[column]}</td>
                     ))}
                     <td>
-                        <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Bus', entry.id)}>
+                        <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Bus', entry["License Plate"], entry.id)}>
                             <img src={icons.WriteIcon} alt="Edit Icon" />&nbsp; Edit
                         </div>
                     </td>
                     <td>
-                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus', entry.id)}>
+                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus', entry["License Plate"], entry.id)}>
                             <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
@@ -179,8 +179,8 @@ const BusesTableContent = ({ entries, columns, handlePopup }) => {
 const StationsTable = (props) => {
     const { columns, entries, setActivePopup } = props;
 
-    const handlePopup = (popupName, key) => {
-        setActivePopup(popupName);
+    const handlePopup = (popupName, subject, key) => {
+        setActivePopup([popupName, subject, key]);
     };
 
     const style = {
@@ -200,8 +200,8 @@ const StationsTable = (props) => {
 const ExpressTable = (props) => {
     const { columns, entries, setActivePopup } = props;
 
-    const handlePopup = (popupName, key) => {
-        setActivePopup(popupName);
+    const handlePopup = (popupName, subject, key) => {
+        setActivePopup([popupName, subject, key]);
     };
 
     const style = {
@@ -271,8 +271,8 @@ const BookingsTable = (props) => {
 
 const BusesTable = (props) => {
     const { columns, entries, setActivePopup } = props;
-    const handlePopup = (popupName, key) => {
-        setActivePopup(popupName);
+    const handlePopup = (popupName, subject, key) => {
+        setActivePopup([popupName, subject, key]);
     };
 
     const style = {

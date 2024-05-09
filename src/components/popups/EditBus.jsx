@@ -12,7 +12,7 @@ export default function EditBus(props) {
     // Closing popup fuction
     const closePopup = (e) => {
         if(!popupContainer.current.contains(e.target)){
-            props.togglePopup()
+            props.togglePopup([])
         }
     }
     return(
@@ -21,7 +21,7 @@ export default function EditBus(props) {
             <div className="popupContainer" ref={popupContainer}>
                 <PopupTitle text="Edit Bus Info" color="#FF4D00"/>
                 <p></p>
-                <ListFormInput image={icons.BusIcon} name="Bus" type="text" blackets="Plate number"/>
+                <ListFormInput image={icons.BusIcon} name="Bus" type="text" blackets={props.subject[1]}/>
                 <ListFormInput image={icons.LockIcon} name="Password" type="Password" blackets="Password"/>
                 <ListFormInput image={icons.CapacityIcon} name="Capacity" type="number" blackets="Capacity"/>
                 <p></p>

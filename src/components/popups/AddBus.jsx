@@ -12,7 +12,7 @@ export default function AddBus(props) {
     // Closing popup fuction
     const closePopup = (e) =>{
         if(!popupContainer.current.contains(e.target)){
-            props.togglePopup('');
+            props.togglePopup([]);
         }
     }
     return(
