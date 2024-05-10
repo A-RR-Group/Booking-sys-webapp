@@ -4,7 +4,7 @@ import "../../assets/css/components/popups/AddEditComponents.css";
 import icons from "../../utils/icons";
 import Button from "../forms/button";
 import PopupTitle from "../pages/PopupTitle";
-import {ListFormInput} from "../forms/ListFormInput";
+import {ListFormDropdown, ListFormInput} from "../forms/ListFormInput";
 import { RideRepeat, TimeInput } from "./RideSubComponents";
 
 export default function AddRide(props) {
@@ -18,10 +18,11 @@ export default function AddRide(props) {
     // Closing popup function
     const closePopup = (e) => {
         if (popupContainer.current.contains(e.target)) {
-            console.log("Popup Container Clicked");
             // Check if repeat ref is defined and if the clicked target is within the repeat component
             if(activeSubPopup){
-                if (repeat.current && repeat.current.contains(e.target) && time.current && time.current.contains(e.target)) {
+                if (repeat.current && repeat.current.contains(e.target)) {
+                    return;
+                }else if ( time.current && time.current.contains(e.target)){
                     return;
                 }else{
                     setActiveSubPopup('');
@@ -45,11 +46,12 @@ export default function AddRide(props) {
                     <PopupTitle text="Add New Ride Listing" color="#FF4D00"/>
                     <p></p>
                     {/* Popup Inputs */}
-                    <ListFormInput image={icons.CurrentLocationIcon} name="From" type="text" blackets="Departure Point"/>
+                    <ListFormDropdown image={icons.CurrentLocationIcon} name="From" entries={props.stations}/>
                     <img className="LocationsDashedLine" src={icons.DashedLineIcon}/>
-                    <ListFormInput image={icons.LocationIcon} name="To" type="text" blackets="Destination"/>
+                    <ListFormDropdown image={icons.LocationIcon} name="To" entries={props.stations}/>
                     <ListFormInput image={icons.DollarIcon} name="Price" type="text" blackets="RWF"/>
-                    <ListFormInput image={icons.BusIcon} name="Bus" type="text" blackets="License Plate"/>
+                    {/* <ListFormInput image={icons.BusIcon} name="Bus" type="text" blackets="License Plate"/> */}
+                    <ListFormDropdown image={icons.BusIcon} name="Bus" entries={props.buses}/>
                     <ListFormInput image={icons.ClockIcon} name="Time" type="text" blackets="Departure Time" disabled="disabled" onClick={() => handleSubPopup("Time")} />
                     {/* Time sub input */}
                     {activeSubPopup === "Time" ? <TimeInput ref={time} togglePopup={setActiveSubPopup}/> : ''}

@@ -119,6 +119,22 @@ export default function ExpressDashboard(){
             'Capacity': '32',
         }
     ]
+    const allStations = [
+        {
+            id: 1,
+            'Name': 'Kigali-Remera',
+            
+        },
+        {
+            id: 2,
+            'Name': 'Kigali-Downtown',
+        },
+        {
+            id: 3,
+            'Name': 'Kigali-Nyabugogo',
+        },
+        
+    ]
 
     // States declaration
     const [activeTableSelector, setActiveTableSelector] = useState('Bookings');
@@ -160,7 +176,7 @@ export default function ExpressDashboard(){
             <>
             {/* Checking the active popup state and popup rendering */}
             {activePopup[0] == "Add Bus" ? <AddBus togglePopup={setActivePopup} subject={activePopup}/>: ''}
-            {activePopup[0] == "Add Ride" ? <AddRide togglePopup={setActivePopup} subject={activePopup}/>: ''}
+            {activePopup[0] == "Add Ride" ? <AddRide togglePopup={setActivePopup} subject={activePopup} stations={allStations} buses={busEntry}/>: ''}
             {activePopup[0] == "Remove Bus" ? <RemoveBus togglePopup={setActivePopup} subject={activePopup}/>: ''}
             {activePopup[0] == "Edit Bus" ? <EditBus togglePopup={setActivePopup} subject={activePopup}/>: ''}
             

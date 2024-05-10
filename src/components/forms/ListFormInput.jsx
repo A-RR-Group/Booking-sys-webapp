@@ -16,4 +16,22 @@ const ListFormInput = ({ image, name, type, blackets, disabled, onClick }) => {
     );
 };
 
-export { ListFormInput };
+const ListFormDropdown = ({ image, name, entries, onChange }) => {
+    return (
+        <div className="listFormInputDiv">
+            <div className="listInputDescriptionDiv">
+                <img src={image} alt="" />
+                <p className="listInputName">{name}:</p>
+            </div>
+            <select className="" id="" onChange={onChange}>
+                {entries.map((entry, index) => (
+                    <option key={index} value={entry.id}>
+                        {Object.values(entry)[1]}
+                    </option>
+                ))}
+            </select>
+        </div>
+    );
+};
+
+export { ListFormInput, ListFormDropdown };
