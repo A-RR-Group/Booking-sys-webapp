@@ -1,26 +1,24 @@
 import { useRef, useState } from "react";
 import "../../assets/css/components/popups/RideSubComponents.css"
+import React, { forwardRef } from 'react';
 
-// Exported componets
-const RideRepeat = (props) =>{
-    const RideRepeatDiv = useRef();
-    
-    return(
+const RideRepeat = forwardRef((props, ref) => {
+    return (
         <>
-        <div className="RideRepeat" ref={RideRepeatDiv} >
-            <div><p className="RideRepeatBy">Every day</p></div>
-            <div><p className="RideRepeatBy">Every weekday</p> <p>Mon-Fri</p></div>
-            <div><p className="RideRepeatBy">Every weekend</p> <p>Sat & Sun</p></div>
-            <div><p className="RideRepeatBy">Every week</p> <p>on Fri</p></div>
-            <div><p className="RideRepeatBy">Every month</p> <p> on the 24th</p></div>
-            <div><p className="RideRepeatBy">Every year</p> <p>on Feb 24th </p></div>
-            <div><p className="RideRepeatBy">Does not repeat</p> <p>Default</p></div>
-        </div>
+            <div className="RideRepeat" ref={ref}>
+                <div><p className="RideRepeatBy">Every day</p></div>
+                <div><p className="RideRepeatBy">Every weekday</p> <p>Mon-Fri</p></div>
+                <div><p className="RideRepeatBy">Every weekend</p> <p>Sat & Sun</p></div>
+                <div><p className="RideRepeatBy">Every week</p> <p>on Fri</p></div>
+                <div><p className="RideRepeatBy">Every month</p> <p> on the 24th</p></div>
+                <div><p className="RideRepeatBy">Every year</p> <p>on Feb 24th </p></div>
+                <div><p className="RideRepeatBy">Does not repeat</p> <p>Default</p></div>
+            </div>
         </>
-    )
-}
+    );
+});
 
-const TimeInput = (props) => {
+const TimeInput = forwardRef((props, ref) => {
     const currentDate = new Date();
     const [hours, setHours] = useState(currentDate.getHours());
     const [minutes, setMinutes] = useState(currentDate.getMinutes());
@@ -49,7 +47,7 @@ const TimeInput = (props) => {
     };
 
     return (
-        <div className="TimeInput">
+        <div className="TimeInput" ref={ref}>
             <div>
                 <p>Set Time:</p>
             </div>
@@ -59,6 +57,6 @@ const TimeInput = (props) => {
             </div>
         </div>
     );
-};
+});
 
 export { RideRepeat, TimeInput }
