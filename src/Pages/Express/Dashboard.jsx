@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import icons from "../../utils/icons"
 
 import StatisticCard from "../../components/pages/StatisticCard";
@@ -15,6 +15,7 @@ import RemoveBus from '../../components/popups/RemoveBus';
 import EditBus from '../../components/popups/EditBus';
 import AddRide from '../../components/popups/AddRide';
 import ExpressLogin from './Login';
+import DesktopOnly from '../Other/DesktopOnly';
 
 export default function ExpressDashboard(){
 
@@ -140,10 +141,21 @@ export default function ExpressDashboard(){
     const [activeTableSelector, setActiveTableSelector] = useState('Bookings');
     const [activeAddButton, setActiveAddButton] = useState('');
     const [activeTable, setActiveTable] = useState('Bookings');
-
     const [activePopup, setActivePopup] = useState([]);
     const [activeMore, setMore] = useState(false);
     const [logedIn, setLogedIn] = useState (true);
+    const [width, setWidth] = useState(window.innerWidth);
+
+    // After page load on resize set new width 
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     // States Handler
     const handleTableSelector = (tableSelectorName) => {
@@ -171,6 +183,8 @@ export default function ExpressDashboard(){
                 <ExpressLogin login={login}/>
             </>
         )
+    }else if (width < 800) {
+        return <DesktopOnly/>
     }else{
         return (
             <>

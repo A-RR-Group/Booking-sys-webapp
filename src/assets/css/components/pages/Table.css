@@ -9,9 +9,9 @@ th {
     color: #000000B2;
 }
 th, td {
-    padding: 14px 0 14px 40px;
+    padding: 10px 0 10px 40px;
     text-align: justify;
-    font-size: 18px;
+    font-size: 14px;
     align-items: center;
     justify-content: center;
 }
