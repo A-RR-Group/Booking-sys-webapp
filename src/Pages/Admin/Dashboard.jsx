@@ -16,32 +16,43 @@ import RemoveExpress from '../../components/popups/RemoveExpress';
 import AdminMore from '../../components/admin/AdminMore';
 import Adminlogin from './Index';
 import DesktopOnly from '../Other/DesktopOnly';
+import { adminLogin, getExpresses, getStations } from '../../utils/apiFunctions';
 
 export default function AdminDashboard() {
 
     // Table data definition
     const tableColumn1 = ['Express Name','Email Address', 'Telephone Number'];
     const tableColumn2 = ['Bus Station name'];
-    const entry1 = [
-        {
-            id: 1,
-            'Express Name': 'Volcano Express',
-            'Email Address': 'volcanoexpress@gmail.com',
-            'Telephone Number': '0788351253',
-        },
-        {
-            id: 2,
-            'Express Name': 'Horizon Express',
-            'Email Address': 'horizonexpress@gmail.com',
-            'Telephone Number': '0788653424',
-        },
-        {
-            id: 3,
-            'Express Name': 'Omega Express',
-            'Email Address': 'omegaexpress@gmail.com',
-            'Telephone Number': '0788301873',
-        }
-    ]
+    let entry1 = [];
+    try {
+        const expresses = getExpresses();
+        // console.log(expresses)
+        entry1 = expresses;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+    entry1 = entry1;
+    // console.log(entry1);
+    // const entry1 = [
+    //     {
+    //         id: 1,
+    //         'Express Name': 'Volcano Express',
+    //         'Email Address': 'volcanoexpress@gmail.com',
+    //         'Telephone Number': '0788351253',
+    //     },
+    //     {
+    //         id: 2,
+    //         'Express Name': 'Horizon Express',
+    //         'Email Address': 'horizonexpress@gmail.com',
+    //         'Telephone Number': '0788653424',
+    //     },
+    //     {
+    //         id: 3,
+    //         'Express Name': 'Omega Express',
+    //         'Email Address': 'omegaexpress@gmail.com',
+    //         'Telephone Number': '0788301873',
+    //     }
+    // ]
     const entry2 = [
         {
             id: 1,
@@ -89,14 +100,19 @@ export default function AdminDashboard() {
         setActivePopup([popupName]);
     };
 
-    // Functions Declaration & Definition
-    const login = (InOrOut) => {
-        if(InOrOut){
-            setLogedIn(true);
-        }else{
-            setLogedIn(false);
+    const login = async (InOrOut) => {
+        try {
+            const access = await adminLogin("aimebrucetesting", "12345");
+
+            if (!access.errors) {
+                setLogedIn(true);
+            } else {
+                setLogedIn(false);
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
-    }
+    };
 
     if(!logedIn){
         return(
