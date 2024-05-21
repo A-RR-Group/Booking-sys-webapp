@@ -73,14 +73,14 @@ const StationTableContent = ({ entries, handlePopup }) => {
         <tbody>
             {entries.map((entry) => (
                 <tr key={entry.id}>
-                    <td>{entry.Name}</td>
+                    <td>{entry.name}</td>
                     <td>
-                        <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Station', entry["Name"], entry.id)}>
+                        <div className="editButton" key={entry.id} onClick={() => handlePopup('Edit Station', entry["name"], entry.id)}>
                             <img src={icons.WriteIcon} alt="Edit Icon" />&nbsp; Edit
                         </div>
                     </td>
                     <td>
-                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus Station', entry["Name"], entry.id)}>
+                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Bus Station', entry["name"], entry.id)}>
                             <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
@@ -95,11 +95,11 @@ const ExpressTableContent = ({ entries, columns, handlePopup }) => {
         <tbody>
             {entries.map((entry) => (
                 <tr key={entry.id}>
-                    {columns.map((column) => (
-                        <td key={column}>{entry[column]}</td>
-                    ))}
+                    <td>{entry.name}</td>
+                    <td>{entry.email}</td>
+                    <td>{entry.phone_number}</td>
                     <td>
-                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Express', entry["Express Name"], entry.id)}>
+                        <div className="deleteButton" key={entry.id} onClick={() => handlePopup('Remove Express', entry["name"], entry.id)}>
                             <img src={icons.DeleteIcon} alt="Delete Icon" /> Remove
                         </div>
                     </td>
