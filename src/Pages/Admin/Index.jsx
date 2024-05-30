@@ -5,9 +5,11 @@ import Button from "../../components/forms/button"
 import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly"
 import { adminLogin } from '../../utils/apiFunctions';
+import Notification from '../../components/pages/Notification';
 
 export default function Adminlogin(props){
     const [width, setWidth] = useState(window.innerWidth);
+    const [notificationMessage, setNotificationMessage] = useState("");
     const access_token = localStorage.getItem("access_token");
     const emailAddressRef = useRef(null);
     const passwordRef = useRef(null);
@@ -31,13 +33,23 @@ export default function Adminlogin(props){
                 localStorage.setItem("user", access.username);
                 props.login(true);
             } else {
-                alert("Wrong credentials")
+                handleNotification(access.errors[0].message);
             }
         } catch (error) {
             console.error('Error:', error);
         }
+        
     };
 
+    function handleNotification (props) {
+        setNotificationMessage(props)
+        setTimeout(() => {
+            setNotificationMessage("")
+        }, 5000);
+    }
+    function closeNotification () {
+        setNotificationMessage("")
+    }
 
     const handleLogin = () => {
         const email = emailAddressRef.current.value;
@@ -45,7 +57,7 @@ export default function Adminlogin(props){
         if (email && password){
             login(email, password);
         }else{
-            console.log("All fields are required");
+            handleNotification("All fields are required")
         }
     };
 
@@ -57,6 +69,7 @@ export default function Adminlogin(props){
     }else{
         return(
             <div className="all">
+                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
                 {/*  Login container  */}
                 <div className="LoginContainer">
                     <img src={icons.BusIcon} className="LogoOrange" alt="" />

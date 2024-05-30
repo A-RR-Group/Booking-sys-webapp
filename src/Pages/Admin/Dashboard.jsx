@@ -1,11 +1,10 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import icons from "../../utils/icons";
-
 import StatisticCard from "../../components/pages/StatisticCard";
 import TableSelector from "../../components/pages/TableSelector";
 import UsernameTitle from '../../components/pages/UsernameTitle';
 import { ExpressTable, StationsTable } from '../../components/pages/Table';
-
 import "../../assets/css/admin/Dashboard.css";
 import AdminAdd from '../../components/pages/AdminAdd';
 import AddExpress from '../../components/popups/AddExpress';
@@ -17,51 +16,14 @@ import AdminMore from '../../components/admin/AdminMore';
 import DesktopOnly from '../Other/DesktopOnly';
 
 export default function AdminDashboard(props) {
-
-    const baseURL= "http://localhost:3000/admin/";
-    
+    const baseURL = "http://localhost:3000/admin/";
     const tableColumn1 = ['Express Name', 'Email Address', 'Telephone Number'];
     const tableColumn2 = ['Bus Station name'];
-
-    async function getExpresses() {
-        const url = baseURL + 'getExpresses';
-    
-        try {
-            const response = await fetch(url, {
-                method: 'GET'
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data.expresses;
-        } catch (error) {
-            console.error('Error:', error);
-            return [];
-        }
-    }
-    
-    async function getStations (){
-        const url = baseURL + 'getStations';
-    
-        try {
-            const response = await fetch(url, {
-                method: 'GET'
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            return data.stations;
-        } catch (error) {
-            console.error('Error:', error);
-            return [];
-        }
-    }
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const [entry1, setEntry1] = useState([]);
     const [entry2, setEntry2] = useState([]);
-
     const [activeTableSelector, setActiveTableSelector] = useState('Express');
     const [activeAddButton, setActiveAddButton] = useState('Express');
     const [activeTable, setActiveTable] = useState('Express');
@@ -69,6 +31,26 @@ export default function AdminDashboard(props) {
     const [activeMore, setMore] = useState(false);
     const [user, setuser] = useState('');
     const [width, setWidth] = useState(window.innerWidth);
+    const [notificationMessage, setNotificationMessage] = useState("");
+
+    const setHeadersBasedOnQuery = () => {
+        const params = new URLSearchParams(location.search);
+        if (params.has('express')) {
+            setActiveTableSelector('Express');
+            setActiveAddButton('Express');
+            setActiveTable('Express');
+        } else if (params.has('station')) {
+            setActiveTableSelector('Bus Stations');
+            setActiveAddButton('Bus Stations');
+            setActiveTable('Bus Stations');
+        } else {
+            navigate('?express'); // Default to 'express' if neither parameter is present
+        }
+    };
+
+    useEffect(() => {
+        setHeadersBasedOnQuery();
+    }, [location]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -92,16 +74,74 @@ export default function AdminDashboard(props) {
         fetchExpresses();
         fetchStations();
 
-        if(localStorage.getItem(user)){
-            setuser(localStorage.getItem(user))
+        if (localStorage.getItem('user')) {
+            setuser(localStorage.getItem('user'));
         }
     }, []);
 
-    const handleTableSelector = (tableSelectorName) => {
-        setActiveTableSelector(tableSelectorName);
-        setActiveAddButton(tableSelectorName);
-        setActiveTable(tableSelectorName);
+    async function getExpresses() {
+        const url = baseURL + 'getExpresses';
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: headers
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data.expresses;
+        } catch (error) {
+            console.error('Error:', error);
+            return [];
+        }
+    }
+
+    async function getStations() {
+        const url = baseURL + 'getStations';
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: headers
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data.stations;
+        } catch (error) {
+            console.error('Error:', error);
+            return [];
+        }
+    }
+
+    const handleTableSelector = (type) => {
+        if (type === 'Express') {
+            navigate('?express');
+        } else if (type === 'Bus Stations') {
+            navigate('?station');
+        }
     };
+
+    function handleNotification (props) {
+        setNotificationMessage(props)
+        setTimeout(() => {
+            setNotificationMessage("")
+        }, 5000);
+    }
+    function closeNotification () {
+        setNotificationMessage("")
+    }
 
     const handlePopup = (popupName) => {
         setActivePopup([popupName]);
@@ -110,50 +150,62 @@ export default function AdminDashboard(props) {
     const logout = () => {
         localStorage.clear();
         props.login(false);
-    }
+        navigate('')
+    };
 
     if (width < 800) {
         return <DesktopOnly />;
     } else {
         return (
             <>
-            {activePopup[0] === "Add Express" && <AddExpress togglePopup={setActivePopup} />}
-            {activePopup[0] === "Add Station" && <AddStation togglePopup={setActivePopup} />}
-            {activePopup[0] === "Edit Station" && <EditStation togglePopup={setActivePopup} subject={activePopup} />}
-            {activePopup[0] === "Remove Bus Station" && <RemoveBusStation togglePopup={setActivePopup} subject={activePopup} />}
-            {activePopup[0] === "Remove Express" && <RemoveExpress togglePopup={setActivePopup} subject={activePopup} />}
-            
-            <div className="AdminDashboardAll">
-                <div className="AdminIconsDiv">
-                    <img src={icons.BlackBusIcon} alt="" />
-                    <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn" />
-                    {activeMore && <AdminMore toggleMore={setMore} onClick={() => logout()} />}
-                </div>
-                <div className="AdminTitles">
-                    <div className="AdminName">       
-                        <h1 className="PageTitle">Administrator Dashboard</h1>
-                        <UsernameTitle username={user} />
+                {activePopup[0] === "Add Express" && <AddExpress togglePopup={setActivePopup} notification={handleNotification}/>}
+                {activePopup[0] === "Add Station" && <AddStation togglePopup={setActivePopup} notification={handleNotification}/>}
+                {activePopup[0] === "Edit Station" && <EditStation togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
+                {activePopup[0] === "Remove Bus Station" && <RemoveBusStation togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
+                {activePopup[0] === "Remove Express" && <RemoveExpress togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
+                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
+
+                <div className="AdminDashboardAll">
+                    <div className="AdminIconsDiv">
+                        <img src={icons.BlackBusIcon} alt="" />
+                        <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn" />
+                        {activeMore && <AdminMore toggleMore={setMore} onClick={() => logout()} />}
                     </div>
-                </div>
-                <div className="AdminSystemStatistics">
-                    <StatisticCard numbers="2,403" category="SMS Sent" position="front" />
-                    <StatisticCard numbers="8,572" category="API Calls" position="middle" />
-                    <StatisticCard numbers="3,406" category="Today's Traffic" position="middle" />
-                    <StatisticCard numbers="102" category="Live Visitors" position="end" />
-                </div>
-                <div className="TableSelectoButtons">
-                    <div className="AdminTableSelector">
-                        <TableSelector name="Express" position="front" onClick={() => handleTableSelector('Express')} state={activeTableSelector === 'Express' ? 'active' : ''} />
-                        <TableSelector name="Bus Stations" position="end" onClick={() => handleTableSelector('Bus Stations')} state={activeTableSelector === 'Bus Stations' ? 'active' : ''} />
+                    <div className="AdminTitles">
+                        <div className="AdminName">
+                            <h1 className="PageTitle">Administrator Dashboard</h1>
+                            <UsernameTitle username={user} />
+                        </div>
                     </div>
-                    <div className="AdminTableButtons">
-                        <AdminAdd clickHandler={() => handlePopup('Add Express')} state={activeAddButton === 'Express' ? 'active' : ''} text="Add Express" />
-                        <AdminAdd clickHandler={() => handlePopup('Add Station')} state={activeAddButton === 'Bus Stations' ? 'active' : ''} text="Add Bus station" /><br /><br />
+                    <div className="AdminSystemStatistics">
+                        <StatisticCard numbers="2,403" category="SMS Sent" position="front" />
+                        <StatisticCard numbers="8,572" category="API Calls" position="middle" />
+                        <StatisticCard numbers="3,406" category="Today's Traffic" position="middle" />
+                        <StatisticCard numbers="102" category="Live Visitors" position="end" />
                     </div>
+                    <div className="TableSelectoButtons">
+                        <div className="AdminTableSelector">
+                            <TableSelector name="Express" position="front" onClick={() => handleTableSelector('Express')} state={activeTableSelector === 'Express' ? 'active' : ''} />
+                            <TableSelector name="Bus Stations" position="end" onClick={() => handleTableSelector('Bus Stations')} state={activeTableSelector === 'Bus Stations' ? 'active' : ''} />
+                        </div>
+                        <div className="AdminTableButtons">
+                            <AdminAdd clickHandler={() => handlePopup('Add Express')} state={activeAddButton === 'Express' ? 'active' : ''} text="Add Express" />
+                            <AdminAdd clickHandler={() => handlePopup('Add Station')} state={activeAddButton === 'Bus Stations' ? 'active' : ''} text="Add Bus station" /><br /><br />
+                        </div>
+                    </div>
+                    <ExpressTable
+                        state={activeTable === 'Express' ? 'active' : ''}
+                        columns={tableColumn1}
+                        entries={entry1}
+                        setActivePopup={setActivePopup}
+                    />
+                    <StationsTable
+                        state={activeTable === 'Bus Stations' ? 'active' : ''}
+                        columns={tableColumn2}
+                        entries={entry2}
+                        setActivePopup={setActivePopup}
+                    />
                 </div>
-                <ExpressTable state={activeTable === 'Express' ? 'active' : ''} columns={tableColumn1} entries={entry1} setActivePopup={setActivePopup} />
-                <StationsTable state={activeTable === 'Bus Stations' ? 'active' : ''} columns={tableColumn2} entries={entry2} setActivePopup={setActivePopup} />
-            </div>
             </>
         );
     }

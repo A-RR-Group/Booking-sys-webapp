@@ -1,6 +1,7 @@
+import React from 'react';
 import "../../assets/css/components/forms/ListFormInput.css";
 
-const ListFormInput = ({ image, name, type, blackets, disabled, onClick }) => {
+const ListFormInput = React.forwardRef(({ image, name, type, blackets, disabled, onClick}, ref ) => {
     return (
         <div className="listFormInputDiv" onClick={onClick}>
             <div className="listInputDescriptionDiv">
@@ -8,13 +9,13 @@ const ListFormInput = ({ image, name, type, blackets, disabled, onClick }) => {
                 <p className="listInputName">{name}:</p>
             </div>
             {disabled ? (
-                <p className="listInputText" onClick={onClick}> {`Click to edit (${blackets})`} </p>
+                <p className="listInputText" ref={ref} onClick={onClick}> {`Click to edit (${blackets})`} </p>
             ) : (
-                <input className="listInput" type={type} placeholder={`Click to edit (${blackets})`}/>
+                <input className="listInput" ref={ref} type={type} placeholder={`Click to edit (${blackets})`}/>
             )}
         </div>
     );
-};
+});
 
 const ListFormDropdown = ({ image, name, entries, onChange }) => {
     return (

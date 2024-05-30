@@ -59,4 +59,129 @@ export function getStations (){
     });
 }
 
-export default {adminLogin, getExpresses, getStations};
+export function addStation(name) {
+    const url = baseURL + 'addBusStation';
+    const data = {
+        name: name,
+        state: true
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        throw error; 
+    });
+}
+
+export function adminSignup(username, email, password) {
+    const url = baseURL + 'register';
+    const data = {
+        username: username,
+        email: email,
+        password: password
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        throw error;
+    });
+}
+
+export function editStation(id , name) {
+    const url = baseURL + 'editBusStation';
+    const data = {
+        id: id,
+        name: name,
+        state: true
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        throw error;
+    });
+}
+
+export function removeStation(id) {
+    const url = baseURL + 'RemoveBusStation';
+    const data = {
+        id: id
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        throw error;
+    });
+}
+
+export function removeExpress(id) {
+    const url = baseURL + 'removeExpress';
+    const data = {
+        id: id
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        throw error;
+    });
+}
+
+export default {adminLogin, getExpresses, getStations, addStation, adminSignup, editStation, removeStation, removeExpress};

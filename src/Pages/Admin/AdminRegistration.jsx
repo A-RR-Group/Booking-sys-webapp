@@ -3,10 +3,17 @@ import InputField from "../../components/forms/inputField"
 import Button from "../../components/forms/button"
 import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { adminSignup } from "../../utils/apiFunctions";
+import { useRef } from "react";
 
 export default function AdminRegistration(){
     
+    const usernameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const navigate = useNavigate();
     const [width, setWidth] = useState(window.innerWidth);
 
     // After page load on resize set new width 
@@ -20,6 +27,26 @@ export default function AdminRegistration(){
         };
     }, []);
 
+    // Signing up 
+    const signup = async() => {
+        var username = usernameRef.current.value
+        var email = emailRef.current.value
+        var password = passwordRef.current.value
+        try {
+            const access = await adminSignup(username, email, password);
+            if (!access.errors) {
+                alert("Successfully signed up");
+                navigate('/admin');
+            } else if (access.errors){
+                alert(access.errors[0].message);
+            } else {
+                alert("Something went wrong");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     // Check width and render appropiate component
     if (width < 700) {
         return <DesktopOnly/>
@@ -30,11 +57,11 @@ export default function AdminRegistration(){
                 <div className="LoginContainer">
                     <img src={icons.BusIcon} className="LogoOrange" alt="" />
                     <div className="InputsDiv">
-                        <InputField image={icons.UserIcon} placeholder="User name" type="text"></InputField>
-                        <InputField image={icons.MailIcon} placeholder="Email address" type="email"></InputField>
-                        <InputField image={icons.LockIcon} placeholder="Password" type="password"></InputField>
+                        <InputField ref={usernameRef} image={icons.UserIcon} placeholder="User name" type="text"></InputField>
+                        <InputField ref={emailRef} image={icons.MailIcon} placeholder="Email address" type="email"></InputField>
+                        <InputField ref={passwordRef} image={icons.LockIcon} placeholder="Password" type="password"></InputField>
                     </div>
-                    <Button text="Register" backgroundColor="#FF4D00"></Button>
+                    <Button text="Register" backgroundColor="#FF4D00" onClick={signup}></Button>
                 </div>
             </div>
         );
