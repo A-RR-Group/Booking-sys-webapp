@@ -5,7 +5,7 @@ import PopupTitle from "../pages/PopupTitle"
 import {ListFormInput} from "../forms/ListFormInput"
 import { useRef } from "react"
 
-export default function AddExpress(props) {
+export default function AddBus(props) {
     const popupContainer = useRef()
     const popupAll = useRef()
 
@@ -15,18 +15,17 @@ export default function AddExpress(props) {
             props.togglePopup([]);
         }
     }
-    
     return(
         <>
         <div className="popupAll" ref={popupAll} onClick={(e) => {closePopup(e)}}>
             <div className="popupContainer" ref={popupContainer}>
-                <PopupTitle text="Add Express" color="#FF4D00"/>
+                <PopupTitle text="Add New Bus" color="#FF4D00"/>
                 <p></p>
-                <ListFormInput image={icons.BusIcon} name="Express" type="text" blackets="Express name"/>
-                <ListFormInput image={icons.MailIcon} name="Email" type="email" blackets="Email adress"/>
-                <ListFormInput image={icons.PhoneIcon} name="Number" type="text" blackets="Phone number"/>
+                <ListFormInput image={icons.BusIcon} name="Bus" type="text" blackets="License Plate"/>
+                <ListFormInput image={icons.LockIcon} name="Password" type="password" blackets="Driver's password"/>
+                <ListFormInput image={icons.CapacityIcon} name="Capacity" type="number" blackets="Number of seats"/>
                 <p></p>
-                <Button text="Add Express" backgroundColor="#FF4D00"></Button>
+                <Button text="Add Bus" backgroundColor="#FF4D00"></Button>
             </div>
         </div>
         </>

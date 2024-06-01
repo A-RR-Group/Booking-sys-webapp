@@ -1,0 +1,17 @@
+.StatisticCard{
+    width: 25%;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F1F1F1;
+    border-right: 4px solid white;
+    color: #000000B2;
+}
+.StatisticCard h1{
+    font-size: 40px;
+}
+.StatisticCard p{
+    font-size: 17px;
+}
