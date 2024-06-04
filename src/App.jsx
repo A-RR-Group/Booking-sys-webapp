@@ -19,7 +19,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/admin" element={adminLogedIn ? <AdminDashboard login={setAdminLogedIn}/> : <Adminlogin login={setAdminLogedIn}/>}></Route>
-      <Route path="/admin/signup" element={ adminLogedIn ? <AdminRegistration/> : <Adminlogin login={setAdminLogedIn}/>}></Route>
+      <Route path="/admin/signup" element={ <AdminRegistration/> }></Route>
       <Route path="/express" element={<ExpressDashboard/>}></Route>
       <Route path="/sandbox" element={<Notification message='Bus removed Successfully'/>}></Route>
     </Routes>

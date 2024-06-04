@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { adminSignup } from "../../utils/apiFunctions";
 import { useRef } from "react";
+import { validateEmail } from "../../utils/functions";
+import Notification from "../../components/pages/Notification";
 
 export default function AdminRegistration(){
     
@@ -14,6 +16,7 @@ export default function AdminRegistration(){
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
+    const [notificationMessage, setNotificationMessage] = useState("");
     const [width, setWidth] = useState(window.innerWidth);
 
     // After page load on resize set new width 
@@ -32,20 +35,41 @@ export default function AdminRegistration(){
         var username = usernameRef.current.value
         var email = emailRef.current.value
         var password = passwordRef.current.value
-        try {
-            const access = await adminSignup(username, email, password);
-            if (!access.errors) {
-                alert("Successfully signed up");
-                navigate('/admin');
-            } else if (access.errors){
-                alert(access.errors[0].message);
-            } else {
-                alert("Something went wrong");
+        if (username && email && password){
+            if(validateEmail(email)){
+                try {
+                    const access = await adminSignup(username, email, password);
+                    if (!access.errors) {
+                        handleNotification(access.message);
+                        setTimeout(() => {
+                            navigate('/admin');
+                        }, 2000);
+                    } else if (access.errors){
+                        handleNotification(access.errors[0].message);
+                    } else {
+                        handleNotification("Something went wrong");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }else{
+                handleNotification("Invalid email");
             }
-        } catch (error) {
-            console.error('Error:', error);
+        }else{
+            handleNotification("All fields are required");
         }
+        
     };
+
+    function handleNotification (props) {
+        setNotificationMessage(props)
+        setTimeout(() => {
+            setNotificationMessage("")
+        }, 5000);
+    }
+    function closeNotification () {
+        setNotificationMessage("")
+    }
 
     // Check width and render appropiate component
     if (width < 700) {
@@ -53,6 +77,8 @@ export default function AdminRegistration(){
     }else{
         return(
             <div className="all">
+                {/* Notification container */}
+                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
                 {/*  Registration container  */}
                 <div className="LoginContainer">
                     <img src={icons.BusIcon} className="LogoOrange" alt="" />
