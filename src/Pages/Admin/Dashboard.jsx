@@ -16,12 +16,12 @@ import AdminMore from '../../components/admin/AdminMore';
 import DesktopOnly from '../Other/DesktopOnly';
 
 export default function AdminDashboard(props) {
+    // Variables declaration
     const baseURL = "http://localhost:3000/admin/";
     const tableColumn1 = ['Express Name', 'Email Address', 'Telephone Number'];
     const tableColumn2 = ['Bus Station name'];
     const location = useLocation();
     const navigate = useNavigate();
-
     const [entry1, setEntry1] = useState([]);
     const [entry2, setEntry2] = useState([]);
     const [activeTableSelector, setActiveTableSelector] = useState('Express');
@@ -33,6 +33,7 @@ export default function AdminDashboard(props) {
     const [width, setWidth] = useState(window.innerWidth);
     const [notificationMessage, setNotificationMessage] = useState("");
 
+    // Rendering tables according to the headers
     const setHeadersBasedOnQuery = () => {
         const params = new URLSearchParams(location.search);
         if (params.has('express')) {
@@ -62,6 +63,7 @@ export default function AdminDashboard(props) {
         };
     }, []);
 
+    // Fetching table data when the page loads
     useEffect(() => {
         const fetchExpresses = async () => {
             const expresses = await getExpresses();
@@ -79,6 +81,7 @@ export default function AdminDashboard(props) {
         }
     }, []);
 
+    // Table data fetching functions
     async function getExpresses() {
         const url = baseURL + 'getExpresses';
         const headers = {
@@ -89,13 +92,17 @@ export default function AdminDashboard(props) {
         try {
             const response = await fetch(url, {
                 method: 'GET',
+                credentials: 'include',
                 headers: headers
             });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
             const data = await response.json();
-            return data.expresses;
+            if(data.access_token){
+                localStorage.setItem("access_token", response.access_token);
+            }else if(data.error == "Unauthorized user" || data.error == "Token missing" || data.error == "Forbidden"){
+                logout();
+            }else{
+                return data.expresses;
+            }
         } catch (error) {
             console.error('Error:', error);
             return [];
@@ -112,19 +119,24 @@ export default function AdminDashboard(props) {
         try {
             const response = await fetch(url, {
                 method: 'GET',
+                credentials: 'include',
                 headers: headers
             });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
             const data = await response.json();
-            return data.stations;
+            if(data.access_token){
+                localStorage.setItem("access_token", response.access_token);
+            }else if(data.error == "Unauthorized user" || data.error == "Token missing" || data.error == "Forbidden"){
+                logout();
+            }else{
+                return data.stations;
+            }
         } catch (error) {
             console.error('Error:', error);
             return [];
         }
     }
 
+    // Handling table selectors
     const handleTableSelector = (type) => {
         if (type === 'Express') {
             navigate('?express');
@@ -158,6 +170,7 @@ export default function AdminDashboard(props) {
     } else {
         return (
             <>
+                {/* Popups that are triggered */}
                 {activePopup[0] === "Add Express" && <AddExpress togglePopup={setActivePopup} notification={handleNotification}/>}
                 {activePopup[0] === "Add Station" && <AddStation togglePopup={setActivePopup} notification={handleNotification}/>}
                 {activePopup[0] === "Edit Station" && <EditStation togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
@@ -183,6 +196,7 @@ export default function AdminDashboard(props) {
                         <StatisticCard numbers="3,406" category="Today's Traffic" position="middle" />
                         <StatisticCard numbers="102" category="Live Visitors" position="end" />
                     </div>
+                    {/* Table selectors */}
                     <div className="TableSelectoButtons">
                         <div className="AdminTableSelector">
                             <TableSelector name="Express" position="front" onClick={() => handleTableSelector('Express')} state={activeTableSelector === 'Express' ? 'active' : ''} />
@@ -193,6 +207,7 @@ export default function AdminDashboard(props) {
                             <AdminAdd clickHandler={() => handlePopup('Add Station')} state={activeAddButton === 'Bus Stations' ? 'active' : ''} text="Add Bus station" /><br /><br />
                         </div>
                     </div>
+                    {/* Tables */}
                     <ExpressTable
                         state={activeTable === 'Express' ? 'active' : ''}
                         columns={tableColumn1}

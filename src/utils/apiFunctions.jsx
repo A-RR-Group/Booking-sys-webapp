@@ -11,6 +11,7 @@ export function adminLogin(email, password) {
 
     return fetch(url, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -20,7 +21,6 @@ export function adminLogin(email, password) {
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
         throw error; // Rethrow the error to be caught by the caller
     });
 }
@@ -29,16 +29,23 @@ export function getExpresses (){
     const url = baseURL + 'getExpresses';
 
     fetch(url, {
-        method: 'GET'
+        method: 'GET',
+        credentials: 'include',
     })
     .then(response => {
         return response.json();
     })
     .then(data => {
-        console.log(data.expresses);
+        if(data.access_token){
+            localStorage.setItem("access_token", response.access_token);
+        }else if(data.error == "Unauthorized user" || data.error == "Token missing"){
+            logout();
+        }else{
+            return data.expresses;
+        }
     })
     .catch(error => {
-        console.error('Error:', error);
+        throw error;
     });
 }
 
@@ -46,16 +53,23 @@ export function getStations (){
     const url = baseURL + 'getStations';
 
     fetch(url, {
-        method: 'GET'
+        method: 'GET',
+        credentials: 'include',
     })
     .then(response => {
         return response.json();
     })
     .then(data => {
-        console.log(data.stations);
+        if(data.access_token){
+            localStorage.setItem("access_token", response.access_token);
+        }else if(data.error == "Unauthorized user" || data.error == "Token missing"){
+            logout();
+        }else{
+            return data.stations;
+        }
     })
     .catch(error => {
-        console.error('Error:', error);
+        throw error;
     });
 }
 
@@ -73,13 +87,13 @@ export function addStation(name) {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: jsonData
     })
     .then(response => {
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
         throw error; 
     });
 }
@@ -105,7 +119,6 @@ export function adminSignup(username, email, password) {
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
         throw error;
     });
 }
@@ -122,6 +135,7 @@ export function editStation(id , name) {
 
     return fetch(url, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -131,7 +145,6 @@ export function editStation(id , name) {
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
         throw error;
     });
 }
@@ -146,6 +159,7 @@ export function removeStation(id) {
 
     return fetch(url, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -155,7 +169,6 @@ export function removeStation(id) {
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
         throw error;
     });
 }
@@ -170,6 +183,7 @@ export function removeExpress(id) {
 
     return fetch(url, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -179,9 +193,35 @@ export function removeExpress(id) {
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
         throw error;
     });
 }
 
-export default {adminLogin, getExpresses, getStations, addStation, adminSignup, editStation, removeStation, removeExpress};
+export async function verifyToken() {
+    const url = baseURL + 'verify_token';
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            credentials: 'include',
+            headers: headers
+        });
+        const data = await response.json();
+        if(data.access_token){
+            localStorage.setItem("access_token", response.access_token);
+            return true;
+        }else if(data.error == "Unauthorized user" || data.error == "Token missing" || data.error == "Forbidden"){
+            return false;
+        }else{
+            return true;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+
+export default {adminLogin, getExpresses, getStations, addStation, adminSignup, editStation, removeStation, removeExpress, verifyToken};

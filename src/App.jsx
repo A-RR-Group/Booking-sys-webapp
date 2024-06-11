@@ -6,14 +6,21 @@ import AdminRegistration from "./Pages/Admin/AdminRegistration";
 import { useEffect, useState } from "react";
 import Adminlogin from "./Pages/Admin/Index";
 import Notification from "./components/pages/Notification";
+import { verifyToken } from "./utils/apiFunctions";
 
 export default function App() {
   const [adminLogedIn, setAdminLogedIn] = useState(false);
   const admin_token = localStorage.getItem("access_token");
 
   useEffect(() => {
+    // Verify the token (if there is one) and set login state
     if(admin_token){
-      setAdminLogedIn(true);
+      if(verifyToken()){
+        setAdminLogedIn(true);
+      } else {
+        setAdminLogedIn(false);
+      }
+      
     }
   }, []);
   return (
