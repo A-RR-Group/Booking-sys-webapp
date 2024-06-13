@@ -67,9 +67,6 @@ export default function AdminRegistration(){
             setNotificationMessage("")
         }, 5000);
     }
-    function closeNotification () {
-        setNotificationMessage("")
-    }
 
     // Check width and render appropiate component
     if (width < 700) {
@@ -78,7 +75,7 @@ export default function AdminRegistration(){
         return(
             <div className="all">
                 {/* Notification container */}
-                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
+                { notificationMessage ? <Notification message={notificationMessage}/> : "" }
                 {/*  Registration container  */}
                 <div className="LoginContainer">
                     <img src={icons.BusIcon} className="LogoOrange" alt="" />

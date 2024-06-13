@@ -41,10 +41,6 @@ export default function AdminDashboard(props) {
         }, 5000);
     };
 
-    const closeNotification = () => {
-        setNotificationMessage("");
-    };
-
     const setHeadersBasedOnQuery = () => {
         const params = new URLSearchParams(location.search);
         if (params.has('express')) {
@@ -174,7 +170,7 @@ export default function AdminDashboard(props) {
                 {activePopup[0] === "Edit Station" && <EditStation togglePopup={setActivePopup} subject={activePopup} setStations={setEntry2} notification={handleNotification}/>}
                 {activePopup[0] === "Remove Bus Station" && <RemoveBusStation togglePopup={setActivePopup} subject={activePopup} setStations={setEntry2} notification={handleNotification}/>}
                 {activePopup[0] === "Remove Express" && <RemoveExpress togglePopup={setActivePopup} setExpresses={setEntry1} subject={activePopup} notification={handleNotification} />}
-                {notificationMessage && <Notification message={notificationMessage} onClick={closeNotification} />}
+                {notificationMessage && <Notification message={notificationMessage} />}
 
                 <div className="AdminDashboardAll">
                     <div className="AdminIconsDiv">

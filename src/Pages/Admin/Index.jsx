@@ -47,9 +47,6 @@ export default function Adminlogin(props){
             setNotificationMessage("")
         }, 5000);
     }
-    function closeNotification () {
-        setNotificationMessage("")
-    }
 
     const handleLogin = () => {
         const email = emailAddressRef.current.value;
@@ -71,7 +68,7 @@ export default function Adminlogin(props){
     }else{
         return(
             <div className="all">
-                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
+                { notificationMessage ? <Notification message={notificationMessage} /> : "" }
                 {/*  Login container  */}
                 <div className="LoginContainer">
                     <img src={icons.BusIcon} className="LogoOrange" alt="" />
