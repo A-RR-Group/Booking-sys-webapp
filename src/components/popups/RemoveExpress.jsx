@@ -22,9 +22,8 @@ export default function RemoveExpress(props) {
         try {
             const access = await removeExpress(id);
             if (!access.errors) {
-                props.notification("Successfully removed");
                 props.togglePopup([]);
-                window.location.reload()
+                props.setExpresses(access.expresses)
             } else if (access.errors){
                 props.notification(access.errors[0].message);
             } else {
@@ -34,7 +33,6 @@ export default function RemoveExpress(props) {
             console.error('Error:', error);
         }
     };
-    removeExpress
 
     return(
         <>

@@ -27,10 +27,15 @@ export function adminLogin(email, password) {
 
 export function getExpresses (){
     const url = baseURL + 'getExpresses';
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+    };
 
     fetch(url, {
         method: 'GET',
         credentials: 'include',
+        headers: headers
     })
     .then(response => {
         return response.json();
@@ -51,10 +56,15 @@ export function getExpresses (){
 
 export function getStations (){
     const url = baseURL + 'getStations';
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+    };
 
     fetch(url, {
         method: 'GET',
         credentials: 'include',
+        headers: headers
     })
     .then(response => {
         return response.json();
@@ -79,15 +89,42 @@ export function addStation(name) {
         name: name,
         state: true
     };
-
     const jsonData = JSON.stringify(data);
 
     return fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        throw error; 
+    });
+}
+
+export function addExpress(name, email, phone) {
+    const url = baseURL + 'addExpress';
+    const data = {
+        name: name,
+        email: email,
+        phone_number: phone,
+        state: true
+    };
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+        },
         body: jsonData
     })
     .then(response => {
@@ -111,7 +148,8 @@ export function adminSignup(username, email, password) {
     return fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
         },
         body: jsonData
     })
@@ -137,7 +175,8 @@ export function editStation(id , name) {
         method: 'POST',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
         },
         body: jsonData
     })
@@ -161,7 +200,8 @@ export function removeStation(id) {
         method: 'POST',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
         },
         body: jsonData
     })
@@ -185,7 +225,8 @@ export function removeExpress(id) {
         method: 'POST',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}`
         },
         body: jsonData
     })
@@ -224,4 +265,4 @@ export async function verifyToken() {
     }
 }
 
-export default {adminLogin, getExpresses, getStations, addStation, adminSignup, editStation, removeStation, removeExpress, verifyToken};
+export default {adminLogin, getExpresses, getStations, addStation, addExpress, adminSignup, editStation, removeStation, removeExpress, verifyToken};

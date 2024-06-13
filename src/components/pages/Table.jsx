@@ -1,14 +1,16 @@
 import "../../assets/css/components/pages/Table.css";
-import icons from "../../utils/icons"
+import icons from "../../utils/icons";
 
 // Table headers components section
 const ExpressTableHeader = ({ columns }) => {
     return (
         <thead>
-            {columns.map((column) => (
-                <th key={column}>{column}</th>
-            ))}
-            <th>Remove</th>
+            <tr>
+                {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                ))}
+                <th>Remove</th>
+            </tr>
         </thead>
     );
 };
@@ -16,53 +18,63 @@ const ExpressTableHeader = ({ columns }) => {
 const StationTableHeader = ({ columns }) => {
     return (
         <thead>
-            {columns.map((column) => (
-                <th key={column}>{column}</th>
-            ))}
-            <th>Edit</th>
-            <th>Remove</th>
+            <tr>
+                {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                ))}
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
         </thead>
     );
 };
 
-const RidesHeader = ({columns}) => {
-    return(
+const RidesHeader = ({ columns }) => {
+    return (
         <thead>
-            {columns.map((column) => (
-                <th key={column}>{column}</th>
-            ))}
+            <tr>
+                {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                ))}
+            </tr>
         </thead>
-    )
-}
+    );
+};
 
-const CanceledHeader = ({columns}) => {
-    return(
+const CanceledHeader = ({ columns }) => {
+    return (
         <thead>
-            {columns.map((column) => (
-                <th key={column}>{column}</th>
-            ))}
+            <tr>
+                {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                ))}
+            </tr>
         </thead>
-    )
-}
+    );
+};
 
-const BookingsHeader = ({columns}) => {
-    return(
+const BookingsHeader = ({ columns }) => {
+    return (
         <thead>
-            {columns.map((column) => (
-                <th key={column}>{column}</th>
-            ))}
+            <tr>
+                {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                ))}
+            </tr>
         </thead>
-    )
-}
+    );
+};
 
 const BusesTableHeader = ({ columns }) => {
     return (
         <thead>
-            {columns.map((column) => (
-                <th key={column}>{column}</th>
-            ))}
-            <th>Edit</th>
-            <th>Remove</th>
+            <tr>
+                {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                ))}
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
         </thead>
     );
 };
@@ -109,7 +121,7 @@ const ExpressTableContent = ({ entries, columns, handlePopup }) => {
     );
 };
 
-const RidesTableContent = ({ entries, columns}) => {
+const RidesTableContent = ({ entries, columns }) => {
     return (
         <tbody className="ridesTableContent">
             {entries.map((entry) => (
@@ -127,7 +139,7 @@ const CanceledTableContent = ({ entries, columns }) => {
     return (
         <tbody className="canceledTableContent">
             {entries.map((entry) => (
-                <tr key={entry.id}> {/* Assigning unique key */}
+                <tr key={entry.id}>
                     {columns.map((column) => (
                         <td key={column}>{entry[column]}</td>
                     ))}
@@ -137,7 +149,7 @@ const CanceledTableContent = ({ entries, columns }) => {
     );
 };
 
-const BookingsTableContent = ({ entries, columns}) => {
+const BookingsTableContent = ({ entries, columns }) => {
     return (
         <tbody className="bookingsTableContent">
             {entries.map((entry) => (
@@ -230,7 +242,7 @@ const RidesTable = (props) => {
     return (
         <table style={style}>
             <RidesHeader columns={columns} />
-            <RidesTableContent entries={entries} columns={columns}/>
+            <RidesTableContent entries={entries} columns={columns} />
         </table>
     );
 };
@@ -247,7 +259,7 @@ const CanceledTable = (props) => {
     return (
         <table style={style}>
             <CanceledHeader columns={columns} />
-            <CanceledTableContent entries={entries} columns={columns}/>
+            <CanceledTableContent entries={entries} columns={columns} />
         </table>
     );
 };
@@ -264,7 +276,7 @@ const BookingsTable = (props) => {
     return (
         <table style={style}>
             <BookingsHeader columns={columns} />
-            <BookingsTableContent entries={entries} columns={columns}/>
+            <BookingsTableContent entries={entries} columns={columns} />
         </table>
     );
 };
@@ -284,7 +296,7 @@ const BusesTable = (props) => {
     return (
         <table style={style}>
             <BusesTableHeader columns={columns} />
-            <BusesTableContent entries={entries} columns={columns} handlePopup={handlePopup}/>
+            <BusesTableContent entries={entries} columns={columns} handlePopup={handlePopup} />
         </table>
     );
 };

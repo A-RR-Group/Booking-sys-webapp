@@ -20,15 +20,15 @@ export default function AddStation(props) {
 
     // Adding station
     const add = async() => {
-        if(nameRef){
+        const name = nameRef.current.value;
+        if(name){
             try {
-                const access = await addStation(nameRef.current.value);
+                const access = await addStation(name);
                 if (!access.errors) {
-                    props.notification("Station added successfully ...");
                     props.togglePopup([]);
-                    window.location.reload()
+                    props.setStations(access.stations);
                 } else if (access.errors){
-                    alert(access.errors[0].message);
+                    props.notification(access.errors[0].message);
                 } else {
                     props.notification("Failed to add station");
                 }
