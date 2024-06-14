@@ -26,21 +26,26 @@ export default function AddExpress(props) {
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
         if(name && email && phone){
-            try {
-                const access = await addExpress(name, email, phone);
-                if (!access.errors) {
-                    props.togglePopup([]);
-                    props.setExpresses(access.expresses);
-                } else if (access.errors){
-                    props.notification(access.errors[0].message);
-                } else {
-                    props.notification("Failed to add express");
+            
+            if(validateEmail(email)){
+                try {
+                    const access = await addExpress(name, email, phone);
+                    if (!access.errors) {
+                        props.togglePopup([]);
+                        props.setExpresses(access.expresses);
+                    } else if (access.errors){
+                        props.notification(access.errors[0].message);
+                    } else {
+                        props.notification("Failed to add express");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
                 }
-            } catch (error) {
-                console.error('Error:', error);
+            }else{
+                props.notification("Invalid email");
             }
         }else{
-            props.notification("All fields are required")
+            props.notification("All fields are required");
         }
         
     };

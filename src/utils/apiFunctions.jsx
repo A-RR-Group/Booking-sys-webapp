@@ -1,4 +1,6 @@
-const baseURL= "http://localhost:3000/admin/";
+import baseUrl from "./baseUrl";
+
+const baseURL= baseUrl;
 
 export function adminLogin(email, password) {
     const url = baseURL + 'login';

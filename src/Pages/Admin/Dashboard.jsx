@@ -15,10 +15,11 @@ import RemoveExpress from '../../components/popups/RemoveExpress';
 import AdminMore from '../../components/admin/AdminMore';
 import DesktopOnly from '../Other/DesktopOnly';
 import Notification from '../../components/pages/Notification'; // Ensure this import is correct
+import baseUrl from "../../utils/baseUrl";
 
 export default function AdminDashboard(props) {
     // Variables declaration
-    const baseURL = "http://localhost:3000/admin/";
+    const baseURL = baseUrl;
     const tableColumn1 = ['Express Name', 'Email Address', 'Telephone Number'];
     const tableColumn2 = ['Bus Station name'];
     const location = useLocation();
