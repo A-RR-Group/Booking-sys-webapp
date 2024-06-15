@@ -14,14 +14,16 @@ import RemoveBusStation from '../../components/popups/RemoveBusStation';
 import RemoveExpress from '../../components/popups/RemoveExpress';
 import AdminMore from '../../components/admin/AdminMore';
 import DesktopOnly from '../Other/DesktopOnly';
+import Notification from '../../components/pages/Notification'; // Ensure this import is correct
+import baseUrl from "../../utils/baseUrl";
 
 export default function AdminDashboard(props) {
-    const baseURL = "http://localhost:3000/admin/";
+    // Variables declaration
+    const baseURL = baseUrl;
     const tableColumn1 = ['Express Name', 'Email Address', 'Telephone Number'];
     const tableColumn2 = ['Bus Station name'];
     const location = useLocation();
     const navigate = useNavigate();
-
     const [entry1, setEntry1] = useState([]);
     const [entry2, setEntry2] = useState([]);
     const [activeTableSelector, setActiveTableSelector] = useState('Express');
@@ -29,9 +31,16 @@ export default function AdminDashboard(props) {
     const [activeTable, setActiveTable] = useState('Express');
     const [activePopup, setActivePopup] = useState([]);
     const [activeMore, setMore] = useState(false);
-    const [user, setuser] = useState('');
+    const [user, setUser] = useState('');
     const [width, setWidth] = useState(window.innerWidth);
     const [notificationMessage, setNotificationMessage] = useState("");
+
+    const handleNotification = (message) => {
+        setNotificationMessage(message);
+        setTimeout(() => {
+            setNotificationMessage("");
+        }, 5000);
+    };
 
     const setHeadersBasedOnQuery = () => {
         const params = new URLSearchParams(location.search);
@@ -75,7 +84,7 @@ export default function AdminDashboard(props) {
         fetchStations();
 
         if (localStorage.getItem('user')) {
-            setuser(localStorage.getItem('user'));
+            setUser(localStorage.getItem('user'));
         }
     }, []);
 
@@ -89,13 +98,17 @@ export default function AdminDashboard(props) {
         try {
             const response = await fetch(url, {
                 method: 'GET',
+                credentials: 'include',
                 headers: headers
             });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
             const data = await response.json();
-            return data.expresses;
+            if (data.access_token) {
+                localStorage.setItem("access_token", response.access_token);
+            } else if (data.error === "Unauthorized user" || data.error === "Token missing" || data.error === "Forbidden") {
+                logout();
+            } else {
+                return data.expresses;
+            }
         } catch (error) {
             console.error('Error:', error);
             return [];
@@ -112,13 +125,17 @@ export default function AdminDashboard(props) {
         try {
             const response = await fetch(url, {
                 method: 'GET',
+                credentials: 'include',
                 headers: headers
             });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
             const data = await response.json();
-            return data.stations;
+            if (data.access_token) {
+                localStorage.setItem("access_token", response.access_token);
+            } else if (data.error === "Unauthorized user" || data.error === "Token missing" || data.error === "Forbidden") {
+                logout();
+            } else {
+                return data.stations;
+            }
         } catch (error) {
             console.error('Error:', error);
             return [];
@@ -133,16 +150,6 @@ export default function AdminDashboard(props) {
         }
     };
 
-    function handleNotification (props) {
-        setNotificationMessage(props)
-        setTimeout(() => {
-            setNotificationMessage("")
-        }, 5000);
-    }
-    function closeNotification () {
-        setNotificationMessage("")
-    }
-
     const handlePopup = (popupName) => {
         setActivePopup([popupName]);
     };
@@ -150,7 +157,7 @@ export default function AdminDashboard(props) {
     const logout = () => {
         localStorage.clear();
         props.login(false);
-        navigate('')
+        navigate('');
     };
 
     if (width < 800) {
@@ -158,12 +165,13 @@ export default function AdminDashboard(props) {
     } else {
         return (
             <>
-                {activePopup[0] === "Add Express" && <AddExpress togglePopup={setActivePopup} notification={handleNotification}/>}
-                {activePopup[0] === "Add Station" && <AddStation togglePopup={setActivePopup} notification={handleNotification}/>}
-                {activePopup[0] === "Edit Station" && <EditStation togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
-                {activePopup[0] === "Remove Bus Station" && <RemoveBusStation togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
-                {activePopup[0] === "Remove Express" && <RemoveExpress togglePopup={setActivePopup} subject={activePopup} notification={handleNotification} />}
-                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
+                {/* Popups that are triggered */}
+                {activePopup[0] === "Add Express" && <AddExpress togglePopup={setActivePopup} setExpresses={setEntry1} notification={handleNotification} />}
+                {activePopup[0] === "Add Station" && <AddStation togglePopup={setActivePopup} setStations={setEntry2} notification={handleNotification} />}
+                {activePopup[0] === "Edit Station" && <EditStation togglePopup={setActivePopup} subject={activePopup} setStations={setEntry2} notification={handleNotification}/>}
+                {activePopup[0] === "Remove Bus Station" && <RemoveBusStation togglePopup={setActivePopup} subject={activePopup} setStations={setEntry2} notification={handleNotification}/>}
+                {activePopup[0] === "Remove Express" && <RemoveExpress togglePopup={setActivePopup} setExpresses={setEntry1} subject={activePopup} notification={handleNotification} />}
+                {notificationMessage && <Notification message={notificationMessage} />}
 
                 <div className="AdminDashboardAll">
                     <div className="AdminIconsDiv">
@@ -183,6 +191,7 @@ export default function AdminDashboard(props) {
                         <StatisticCard numbers="3,406" category="Today's Traffic" position="middle" />
                         <StatisticCard numbers="102" category="Live Visitors" position="end" />
                     </div>
+                    {/* Table selectors */}
                     <div className="TableSelectoButtons">
                         <div className="AdminTableSelector">
                             <TableSelector name="Express" position="front" onClick={() => handleTableSelector('Express')} state={activeTableSelector === 'Express' ? 'active' : ''} />
@@ -193,6 +202,7 @@ export default function AdminDashboard(props) {
                             <AdminAdd clickHandler={() => handlePopup('Add Station')} state={activeAddButton === 'Bus Stations' ? 'active' : ''} text="Add Bus station" /><br /><br />
                         </div>
                     </div>
+                    {/* Tables */}
                     <ExpressTable
                         state={activeTable === 'Express' ? 'active' : ''}
                         columns={tableColumn1}

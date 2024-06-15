@@ -6,11 +6,11 @@ import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly"
 import { adminLogin } from '../../utils/apiFunctions';
 import Notification from '../../components/pages/Notification';
+import { validateEmail } from '../../utils/functions';
 
 export default function Adminlogin(props){
     const [width, setWidth] = useState(window.innerWidth);
     const [notificationMessage, setNotificationMessage] = useState("");
-    const access_token = localStorage.getItem("access_token");
     const emailAddressRef = useRef(null);
     const passwordRef = useRef(null);
 
@@ -36,7 +36,7 @@ export default function Adminlogin(props){
                 handleNotification(access.errors[0].message);
             }
         } catch (error) {
-            console.error('Error:', error);
+            throw error;
         }
         
     };
@@ -47,29 +47,28 @@ export default function Adminlogin(props){
             setNotificationMessage("")
         }, 5000);
     }
-    function closeNotification () {
-        setNotificationMessage("")
-    }
 
     const handleLogin = () => {
         const email = emailAddressRef.current.value;
         const password = passwordRef.current.value;
         if (email && password){
-            login(email, password);
+            if(validateEmail(email)){
+                login(email, password);
+            }else{
+                handleNotification("Invalid email");
+            }
         }else{
             handleNotification("All fields are required")
         }
     };
-
-    if (access_token){
-        return;
-    }else if (width < 700) {
+    
+    if (width < 700) {
     // Check width and render appropiate component
         return <DesktopOnly/>
     }else{
         return(
             <div className="all">
-                { notificationMessage ? <Notification message={notificationMessage} onClick={closeNotification}/> : "" }
+                { notificationMessage ? <Notification message={notificationMessage} /> : "" }
                 {/*  Login container  */}
                 <div className="LoginContainer">
                     <img src={icons.BusIcon} className="LogoOrange" alt="" />

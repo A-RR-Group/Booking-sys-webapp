@@ -18,14 +18,12 @@ export default function RemoveBusStation(props) {
     // Deleting station
     const remove = async() => {
         var id = props.subject[2];
-        console.log(id)
 
         try {
             const access = await removeStation(id);
             if (!access.errors) {
-                props.notification("Successfully removed");
                 props.togglePopup([]);
-                window.location.reload()
+                props.setStations(access.stations);
             } else if (access.errors){
                 props.notification(access.errors[0].message);
             } else {
