@@ -1,0 +1,16 @@
+.NotificationContainer {
+    display: flex;
+    padding: 10px 20px 10px 20px;
+    gap: 2px;
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+    font-weight: bold;
+    width: max-content;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: auto;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}

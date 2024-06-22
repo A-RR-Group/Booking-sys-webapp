@@ -1,0 +1,14 @@
+.AdminAddDiv{
+    font-size: 18px;
+    color: #FF4D00;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+}
+.AdminAddDiv img{
+    width: 15px;
+    height:15px ;
+}

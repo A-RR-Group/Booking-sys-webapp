@@ -1,0 +1,44 @@
+.FieldContainer{
+    width: 360px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid grey;
+    border-radius: 6px;
+}
+
+.FieldImageDiv{
+    border-right: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3%;
+}
+
+.FieldImageDiv img{
+    width: 20px;
+    height: 20px;
+}
+
+.InputDiv{
+    width: 100%;
+    height: 40px;
+    border: none;
+    display: flex;
+}
+.InputDiv input{
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 0 0 0 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.InputDiv input::placeholder{
+    font-size: 15px;
+}
