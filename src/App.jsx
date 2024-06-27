@@ -25,9 +25,9 @@ export default function App() {
   }, []);
   return (
     <Routes>
-      <Route path="/" element={<Adminlogin/>}></Route>
-      <Route path="/admin" element={<Adminlogin/>}></Route>
-      <Route path="/sandbox" element={<DesktopOnly/>}></Route>
+      <Route path="//" element={<Adminlogin/>}></Route>
+      <Route path="./admin" element={<Adminlogin/>}></Route>
+      <Route path="./sandbox" element={<DesktopOnly/>}></Route>
     </Routes>
   )
 }
