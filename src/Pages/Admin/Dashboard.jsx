@@ -110,7 +110,7 @@ export default function AdminDashboard(props) {
                 return data.expresses;
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.log('Error:', error);
             return [];
         }
     }
@@ -137,7 +137,7 @@ export default function AdminDashboard(props) {
                 return data.stations;
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.log('Error:', error);
             return [];
         }
     }

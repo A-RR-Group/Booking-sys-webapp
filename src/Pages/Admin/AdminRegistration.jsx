@@ -4,7 +4,7 @@ import Button from "../../components/forms/button"
 import "../../assets/css/admin/LoginSignup.css"
 import DesktopOnly from "../Other/DesktopOnly";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { adminSignup } from "../../utils/apiFunctions";
 import { useRef } from "react";
 import { validateEmail } from "../../utils/functions";
@@ -50,7 +50,7 @@ export default function AdminRegistration(){
                         handleNotification("Something went wrong");
                     }
                 } catch (error) {
-                    console.error('Error:', error);
+                    console.log('Error:', error);
                 }
             }else{
                 handleNotification("Invalid email");
