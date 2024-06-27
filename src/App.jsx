@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Adminlogin from "./Pages/Admin/Index";
 import Notification from "./components/pages/Notification";
 import { verifyToken } from "./utils/apiFunctions";
+import DesktopOnly from "./Pages/Other/DesktopOnly";
 
 export default function App() {
   const [adminLogedIn, setAdminLogedIn] = useState(false);
