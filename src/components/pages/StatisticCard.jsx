@@ -1,4 +1,5 @@
 import "../../assets/css/components/pages/StatisticCard.css"
+import React from "react"
 
 export default function StatisticCard(props) {
     // Checking the card position and setting it's styles

@@ -1,4 +1,5 @@
 import icons from "../../utils/icons"
+import React from "react"
 import "../../assets/css/components/pages/AdminAdd.css";
 
 export default function AdminAdd(props){

@@ -1,4 +1,5 @@
 import "../../assets/css/components/pages/TableSelector.css";
+import React from "react"
 
 export default function TableSelector(props) {
     // Checking the table selectors' states and positions + setting their styles
