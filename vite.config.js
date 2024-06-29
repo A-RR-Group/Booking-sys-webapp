@@ -8,6 +8,7 @@ export default defineConfig({
     port: process.env.PORT || 3000,
   },
   build: {
+    outDir: 'dist',
     rollupOptions: {
       output: {
         manualChunks: undefined,
