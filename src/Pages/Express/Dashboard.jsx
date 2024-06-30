@@ -17,7 +17,7 @@ import AddRide from '../../components/popups/AddRide';
 import ExpressLogin from './Login';
 import DesktopOnly from '../Other/DesktopOnly';
 
-export default function ExpressDashboard(){
+export default function ExpressDashboard(props){
 
     // Table data definition
     const busColumn = ['License Plate', 'Password', 'Capacity'];
@@ -143,7 +143,6 @@ export default function ExpressDashboard(){
     const [activeTable, setActiveTable] = useState('Bookings');
     const [activePopup, setActivePopup] = useState([]);
     const [activeMore, setMore] = useState(false);
-    const [logedIn, setLogedIn] = useState (true);
     const [width, setWidth] = useState(window.innerWidth);
 
     // After page load on resize set new width 
@@ -168,22 +167,12 @@ export default function ExpressDashboard(){
     };
 
     // Functions Declaration & Definition
-    const login = (InOrOut) => {
-        // navigate('/express');
-        if(InOrOut){
-            setLogedIn(true);
-        }else{
-            setLogedIn(false);
-        }
+    const logout = () => {
+        localStorage.clear();
+        props.login(false)
     }
 
-    if(!logedIn){
-        return(
-            <>
-                <ExpressLogin login={login}/>
-            </>
-        )
-    }else if (width < 800) {
+    if (width < 800) {
         return <DesktopOnly/>
     }else{
         return (
@@ -203,7 +192,7 @@ export default function ExpressDashboard(){
                         <PopupTitle text="Add Ride" color="#FF4D00" onClick={() => handlePopup ('Add Ride')} cursor="pointer"/>
                         <img src={icons.BlackMoreIcon} alt="" onClick={() => setMore(!activeMore)} className="moreBtn"/>
                     </div>
-                    {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => login(false) }/> : ''}
+                    {activeMore == true ? <AdminMore toggleMore={setMore} onClick={() => logout() }/> : ''}
                 </div>
                 {/* Admin Titles Division */}
                 <div className="AdminTitles">
