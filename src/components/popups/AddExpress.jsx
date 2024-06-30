@@ -3,7 +3,7 @@ import icons from "../../utils/icons"
 import Button from "../forms/button"
 import PopupTitle from "../pages/PopupTitle"
 import {ListFormInput} from "../forms/ListFormInput"
-import { useRef } from "react"
+import React, { useRef } from "react"
 import { addExpress } from "../../utils/apiFunctions"
 
 export default function AddExpress(props) {
@@ -39,7 +39,7 @@ export default function AddExpress(props) {
                         props.notification("Failed to add express");
                     }
                 } catch (error) {
-                    console.error('Error:', error);
+                    console.log('Error:', error);
                 }
             }else{
                 props.notification("Invalid email");

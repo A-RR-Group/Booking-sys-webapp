@@ -1,4 +1,5 @@
 import "../../assets/css/components/popups/popupTitle.css"
+import React from "react"
 
 export default function PopupTitle(props){
     const style = {

@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import React, { useRef } from "react"
 import "../../assets/css/components/popups/RemoveComponents.css"
 import { removeStation } from "../../utils/apiFunctions";
 import Button from "../forms/button"
@@ -30,7 +30,7 @@ export default function RemoveBusStation(props) {
                 props.notification("Something went wrong");
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.log('Error:', error);
         }
     };
 

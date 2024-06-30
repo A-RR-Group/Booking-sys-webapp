@@ -1,9 +1,35 @@
 import baseUrl from "./baseUrl";
 
-const baseURL= baseUrl;
+const baseURL= baseUrl.baseUrl;
+const expressBaseURL = baseUrl.expressBaseURL;
 
 export function adminLogin(email, password) {
     const url = baseURL + 'login';
+    const data = {
+        email: email,
+        password: password
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    return fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        throw error; // Rethrow the error to be caught by the caller
+    });
+}
+
+export function expressLogin(email, password) {
+    const url = expressBaseURL + 'login';
     const data = {
         email: email,
         password: password
@@ -267,4 +293,4 @@ export async function verifyToken() {
     }
 }
 
-export default {adminLogin, getExpresses, getStations, addStation, addExpress, adminSignup, editStation, removeStation, removeExpress, verifyToken};
+export default {adminLogin, expressLogin, getExpresses, getStations, addStation, addExpress, adminSignup, editStation, removeStation, removeExpress, verifyToken};

@@ -1,4 +1,5 @@
 import icons from "../../utils/icons"
+import React from "react"
 import "../../assets/css/other/UpScaleScreen.css"
 
 export default function Upscale() {

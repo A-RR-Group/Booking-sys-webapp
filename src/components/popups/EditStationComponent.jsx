@@ -3,7 +3,7 @@ import icons from "../../utils/icons"
 import Button from "../forms/button"
 import PopupTitle from "../pages/PopupTitle"
 import {ListFormInput} from "../forms/ListFormInput"
-import { useRef } from "react"
+import React, { useRef } from "react"
 import { editStation } from "../../utils/apiFunctions"
 
 export default function EditStation(props) {
@@ -33,7 +33,7 @@ export default function EditStation(props) {
                     props.notification("Something went wrong");
                 }
             } catch (error) {
-                console.error('Error:', error);
+                console.log('Error:', error);
                 props.notification('An error occurred while editing the station');
             }
         } else {

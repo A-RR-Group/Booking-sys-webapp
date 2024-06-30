@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import React, { useRef } from "react"
 import "../../assets/css/components/popups/RemoveComponents.css"
 import Button from "../forms/button"
 import PopupTitle from "../pages/PopupTitle"

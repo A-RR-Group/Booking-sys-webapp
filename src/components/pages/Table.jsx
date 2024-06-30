@@ -1,5 +1,6 @@
 import "../../assets/css/components/pages/Table.css";
 import icons from "../../utils/icons";
+import React from "react"
 
 // Table headers components section
 const ExpressTableHeader = ({ columns }) => {

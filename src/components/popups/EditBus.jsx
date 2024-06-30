@@ -3,7 +3,7 @@ import icons from "../../utils/icons"
 import Button from "../forms/button"
 import PopupTitle from "../pages/PopupTitle"
 import {ListFormInput} from "../forms/ListFormInput"
-import { useRef } from "react"
+import React, { useRef } from "react"
 
 export default function EditBus(props) {
     const popupAll = useRef()

@@ -1,4 +1,5 @@
 import icons from "../../utils/icons"
+import React from "react"
 import "../../assets/css/other/DesktopOnly.css"
 
 export default function DesktopOnly(){
